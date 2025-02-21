@@ -26,7 +26,7 @@ namespace CourseWorkCarsharing
             InitializeComponent();
             MainFrame.Navigate(new MainPage());
             Manager.MainFrame = MainFrame;
-
+            this.StateChanged += MainWindow_StateChanged;
         }
 
         private void MouseOutClick(object sender, RoutedEventArgs e)
@@ -53,19 +53,24 @@ namespace CourseWorkCarsharing
         }
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
+            // Get the current page from the MainFrame
+            var currentPage = MainFrame.Content as MainPage; // Safe cast to MainPage
+
+            if (currentPage != null) // Check if the cast was successful
             {
-                // Измените размер шрифта на MainPage
-                var mainPage = (MainPage)this.Content; // Предполагаем, что MainPage является контентом основного окна
-                mainPage.UpdateFontSize(805);
-            }
-            else
-            {
-                // Вернуть шрифт в исходный размер, если нужно
-                var mainPage = (MainPage)this.Content;
-                mainPage.UpdateFontSize(12); // Установите ваш стандартный размер шрифта
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    // Change the font size when maximized
+                    currentPage.UpdateFontSize(115);
+                }
+                else
+                {
+                    // Reset the font size when not maximized
+                    currentPage.UpdateFontSize(68); // Set your standard font size
+                }
             }
         }
+
 
         private void RulesButtonClick(object sender, RoutedEventArgs e)
         {

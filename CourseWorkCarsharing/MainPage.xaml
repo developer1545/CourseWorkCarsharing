@@ -11,41 +11,44 @@
     <Grid Background="#E6E6FA">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <Grid  Background="#FFD8D8FF" >
+            <Grid  Background="#FFE3E3E3" >
                 <StackPanel >
                     <Grid >
                         <Image Source="/imageMain/mainImage3.jpg"  />
                         <TextBlock x:Name="TextM1" Text="Каршеринг, который не подведёт" FontSize="68" Foreground="Black" TextWrapping="Wrap" FontFamily="Tw Cen MT Condensed Extra Bold" Opacity="0.6" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
-                    <TextBlock Text="Мы об этом уже позаботились" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold"/>
+                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="1,1,1,1" Margin="0,300,0,0" Background="White" >
+                        <TextBlock x:Name="TextM2" Text="Мы об этом позаботились" FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                    </Border>
                     <UniformGrid>
-                        <Button Content="Мойка" FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White">
+                        <Button Content="Мойка" FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Height="300" BorderBrush="Black">
                             <Button.Background>
                                 <ImageBrush ImageSource="/imageMain/washingM.jpg" Stretch="UniformToFill"/>
                             </Button.Background>
+
                         </Button>
-                        <Button Content="Бензин" FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold">
+                        <Button Content="Бензин" FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" BorderBrush="Black">
                             <Button.Background>
                                 <ImageBrush ImageSource="/imageMain/GazolinM.jpg" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
-                        <Button  FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Height="206">
+                        <Button  FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black">
                             <Button.Background>
                                 <ImageBrush ImageSource="/imageMain/repairM.jpg" Stretch="UniformToFill"/>
                             </Button.Background>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Обслуживание" FontSize="30" /><LineBreak /><Run Text="           и" /><LineBreak /><Run Text="     ремонт" /></TextBlock>
                         </Button>
-                        <Button Content="Детские кресла" FontSize="30" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White">
+                        <Button Content="Детские кресла" FontSize="30" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black">
                             <Button.Background>
                                 <ImageBrush ImageSource="/imageMain/childSafetySeats.jpg" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
-                        <Button Content="Страховка" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" >
+                        <Button Content="Страховка" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black" >
                             <Button.Background>
                                 <ImageBrush Stretch="UniformToFill" ImageSource="/imageMain/insurance.jpg"/>
                             </Button.Background>
                         </Button>
-                        <Button Content="Доступность" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" >
+                        <Button Content="Доступность" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black" >
                             <Button.Background>
                                 <ImageBrush Stretch="UniformToFill" ImageSource="/imageMain/AvailabilityM.jpg"/>
                             </Button.Background>

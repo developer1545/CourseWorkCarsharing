@@ -28,6 +28,9 @@ namespace CourseWorkCarsharing
         public void UpdateFontSize(double newSize)
         {
             TextM1.FontSize = newSize;
+            TextM2.FontSize = newSize - 10;
         }
+
+        
     }
 }

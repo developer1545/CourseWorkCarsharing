@@ -14,14 +14,14 @@
                 <RowDefinition Height="*"/>
                 <!--<RowDefinition Height="30" />-->
             </Grid.RowDefinitions>
-            <Grid Background="#4B0082" Margin="0,0,0,0" >
+            <Grid Background="Black" Margin="0,0,0,0" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="505*"/>
-                        <ColumnDefinition Width="148"/>
-                        <ColumnDefinition Width="147*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="83"/>
+                        <ColumnDefinition Width="49*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="StackP" Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <StackPanel x:Name="StackP" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="550" Margin="10,0,0,0" >
                         <Button x:Name="ButtonRules" Content="Правила" Height="30" FontSize="22" Foreground="Lavender" BorderBrush="White" Click="RulesButtonClick" Background="{x:Null}" FontFamily="Tw Cen MT Condensed Extra Bold" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
@@ -79,7 +79,7 @@
                         </Button>
 
                     </StackPanel>
-                    <Border BorderBrush="#E6E6FA" BorderThickness="1,1,1,1" Height="40" Width="132" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,10,0" CornerRadius="0,0,20,20">
+                    <Border BorderThickness="1,1,1,1" Height="40" Width="131" Grid.Column="2" CornerRadius="1,1,1,1" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <StackPanel Orientation="Horizontal" Width="127" Height="50" HorizontalAlignment="Left" Margin="3,-6,0,-6">
                             <Button Height="35" Width="40" Click="MouseMaximazeClick" BorderBrush="#E6E6FA" Background="#FFE5E5E5" Content="➖" FontSize="20" Foreground="#001F3F" >
                                 <Button.Template>
@@ -87,7 +87,7 @@
                                         <Border Background="{TemplateBinding Background}" 
                       BorderBrush="{TemplateBinding BorderBrush}" 
                       BorderThickness="{TemplateBinding BorderThickness}" 
-                      CornerRadius="0,15,0,15">
+                      CornerRadius="1,1,1,1">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -99,7 +99,7 @@
                                         <Border Background="{TemplateBinding Background}" 
       BorderBrush="{TemplateBinding BorderBrush}" 
       BorderThickness="{TemplateBinding BorderThickness}" 
-      CornerRadius="15,15,0,0">
+      CornerRadius="1,1,1,1">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -109,9 +109,9 @@
                                 <Button.Template>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Border Background="{TemplateBinding Background}" 
-                 BorderBrush="{TemplateBinding BorderBrush}" 
-                 BorderThickness="{TemplateBinding BorderThickness}" 
-                 CornerRadius="15,0,15,0">
+                                 BorderBrush="{TemplateBinding BorderBrush}" 
+                                 BorderThickness="{TemplateBinding BorderThickness}" 
+                                 CornerRadius="1,1,1,1">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -119,16 +119,36 @@
                             </Button>
                         </StackPanel>
                     </Border>
-                    <TextBlock Text="🚘" Grid.Column="1" FontSize="52" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Каршеринг " FontSize="18" Foreground="Lavender" Grid.Column="1" Height="28" Width="123" FontFamily="Segoe Script" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
 
             </Grid>
+           
             <Frame  NavigationUIVisibility="Hidden" Grid.Row="1" Name="MainFrame" Grid.RowSpan="2" Navigated="MainFrame_Navigated"/>
             <!--<Grid Grid.Row="2" Background="#FFF1F1F1" />-->
-            <Grid>
-            
-    </Grid>
+            <Grid/>
+           
         </Grid>
+        <Button  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FFFFD400" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" >
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+           BorderBrush="{TemplateBinding BorderBrush}" 
+           CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Opacity" Value="0.6"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1.0"/>
+     
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
