@@ -1,0 +1,134 @@
+﻿<Window x:Class="CourseWorkCarsharing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWorkCarsharing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None">
+
+    <Grid>
+        <Grid Background="#E6E6FA" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <!--<RowDefinition Height="30" />-->
+            </Grid.RowDefinitions>
+            <Grid Background="#4B0082" Margin="0,0,0,0" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="505*"/>
+                        <ColumnDefinition Width="148"/>
+                        <ColumnDefinition Width="147*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="StackP" Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <Button x:Name="ButtonRules" Content="Правила" Height="30" FontSize="22" Foreground="Lavender" BorderBrush="White" Click="RulesButtonClick" Background="{x:Null}" FontFamily="Tw Cen MT Condensed Extra Bold" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+                 BorderBrush="{TemplateBinding BorderBrush}" 
+                 CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" Width="105">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button x:Name="ButtonHelp" Content="Помощь" Background="{x:Null}" Height="30" FontSize="22" Margin="5,0,0,0" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+                         BorderBrush="{TemplateBinding BorderBrush}" 
+                         CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" Width="106">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button x:Name="ButtonRate" Content="Тарифы" Background="{x:Null}" Height="30" FontSize="22" Margin="5,0,0,0" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" Width="103" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+      BorderBrush="{TemplateBinding BorderBrush}" 
+      CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" Width="100">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button x:Name="ButtonPark" Content="Парк" Background="{x:Null}" Height="30" FontSize="22" Margin="5,0,0,0" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+      BorderBrush="{TemplateBinding BorderBrush}" 
+      CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" Width="69">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button x:Name="ButtonBusiness" Content="Для бизнеса" Background="{x:Null}" Height="30" FontSize="22" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" BorderThickness="0,0,1,0" Width="152" Grid.IsSharedSizeScope="True" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+      BorderBrush="{TemplateBinding BorderBrush}" 
+      CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" Width="148">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                    </StackPanel>
+                    <Border BorderBrush="#E6E6FA" BorderThickness="1,1,1,1" Height="40" Width="132" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,10,0" CornerRadius="0,0,20,20">
+                        <StackPanel Orientation="Horizontal" Width="127" Height="50" HorizontalAlignment="Left" Margin="3,-6,0,-6">
+                            <Button Height="35" Width="40" Click="MouseMaximazeClick" BorderBrush="#E6E6FA" Background="#FFE5E5E5" Content="➖" FontSize="20" Foreground="#001F3F" >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" 
+                      BorderBrush="{TemplateBinding BorderBrush}" 
+                      BorderThickness="{TemplateBinding BorderThickness}" 
+                      CornerRadius="0,15,0,15">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Height="35" Width="40" Click="FullscreenButtonClick" BorderBrush="#E6E6FA" Margin="2,0,0,0" Background="#FFE5E5E5" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Content="◼️" Foreground="#001F3F" >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" 
+      BorderBrush="{TemplateBinding BorderBrush}" 
+      BorderThickness="{TemplateBinding BorderThickness}" 
+      CornerRadius="15,15,0,0">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Height="35" Background="#FFE5E5E5" Click="MouseOutClick" Width="40" UseLayoutRounding="True" FontSize="20" BorderBrush="#E6E6FA" Margin="2,0,0,0" Content="✖️" Foreground="#001F3F" >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" 
+                 BorderBrush="{TemplateBinding BorderBrush}" 
+                 BorderThickness="{TemplateBinding BorderThickness}" 
+                 CornerRadius="15,0,15,0">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Text="🚘" Grid.Column="1" FontSize="52" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="Каршеринг " FontSize="18" Foreground="Lavender" Grid.Column="1" Height="28" Width="123" FontFamily="Segoe Script" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+
+            </Grid>
+            <Frame  NavigationUIVisibility="Hidden" Grid.Row="1" Name="MainFrame" Grid.RowSpan="2" Navigated="MainFrame_Navigated"/>
+            <!--<Grid Grid.Row="2" Background="#FFF1F1F1" />-->
+            <Grid>
+            
+    </Grid>
+        </Grid>
+    </Grid>
+</Window>
