@@ -44,29 +44,33 @@ namespace CourseWorkCarsharing
             if (this.WindowState == WindowState.Normal)
             {
                 this.WindowState = WindowState.Maximized;
+                ButtonOrder.Width = 400;
+                ButtonOrder.Height = 80;
                
             }
             else
             {
                 this.WindowState = WindowState.Normal;
+                ButtonOrder.Width = 249;
+                ButtonOrder.Height = 53;
             }
         }
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            // Get the current page from the MainFrame
-            var currentPage = MainFrame.Content as MainPage; // Safe cast to MainPage
+            
+            var currentPage = MainFrame.Content as MainPage; 
 
-            if (currentPage != null) // Check if the cast was successful
+            if (currentPage != null) 
             {
                 if (this.WindowState == WindowState.Maximized)
                 {
-                    // Change the font size when maximized
+         
                     currentPage.UpdateFontSize(115);
                 }
                 else
                 {
-                    // Reset the font size when not maximized
-                    currentPage.UpdateFontSize(68); // Set your standard font size
+                 
+                    currentPage.UpdateFontSize(68); 
                 }
             }
         }

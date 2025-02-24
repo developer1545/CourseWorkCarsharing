@@ -136,5 +136,17 @@
   <ItemGroup>
     <Resource Include="imageMain\AvailabilityM.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mashine\pngimg.com - citroen_PNG82.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mashine\pngimg.com - bmw_PNG99532.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mashine\pngimg.com - ford_PNG102956.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mashine\pngimg.com - honda_PNG10350.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

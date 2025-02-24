@@ -11,49 +11,179 @@
     <Grid Background="#E6E6FA">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <Grid  Background="#FFE3E3E3" >
-                <StackPanel >
+            <Grid  Background="#FFF4F4F4" >
+                <StackPanel  >
+
+
                     <Grid >
-                        <Image Source="/imageMain/mainImage3.jpg"  />
+                        <Border CornerRadius="1,1,1,1" BorderThickness="1,1,1,1" >
+                            <Image Source="/imageMain/mainImage3.jpg"  />
+                        </Border>
                         <TextBlock x:Name="TextM1" Text="Каршеринг, который не подведёт" FontSize="68" Foreground="Black" TextWrapping="Wrap" FontFamily="Tw Cen MT Condensed Extra Bold" Opacity="0.6" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
-                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="1,1,1,1" Margin="0,300,0,0" Background="White" >
-                        <TextBlock x:Name="TextM2" Text="Мы об этом позаботились" FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
-                    </Border>
-                    <UniformGrid>
-                        <Button Content="Мойка" FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Height="300" BorderBrush="Black">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/imageMain/washingM.jpg" Stretch="UniformToFill"/>
-                            </Button.Background>
 
-                        </Button>
-                        <Button Content="Бензин" FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" BorderBrush="Black">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/imageMain/GazolinM.jpg" Stretch="UniformToFill"/>
-                            </Button.Background>
-                        </Button>
-                        <Button  FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/imageMain/repairM.jpg" Stretch="UniformToFill"/>
-                            </Button.Background>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Обслуживание" FontSize="30" /><LineBreak /><Run Text="           и" /><LineBreak /><Run Text="     ремонт" /></TextBlock>
-                        </Button>
-                        <Button Content="Детские кресла" FontSize="30" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/imageMain/childSafetySeats.jpg" Stretch="UniformToFill"/>
-                            </Button.Background>
-                        </Button>
-                        <Button Content="Страховка" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black" >
-                            <Button.Background>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="/imageMain/insurance.jpg"/>
-                            </Button.Background>
-                        </Button>
-                        <Button Content="Доступность" FontSize="36" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" BorderBrush="Black" >
-                            <Button.Background>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="/imageMain/AvailabilityM.jpg"/>
-                            </Button.Background>
-                        </Button>
+                    <Border CornerRadius="1,1,1,1" Margin="100,100,60,0" >
+                        <TextBlock x:Name="TextM2" Text="Мы об этом позаботились" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Margin="20,0,0,0"/>
+                    </Border>
+                    <UniformGrid Rows="2" Columns="3" Margin="100,0,150,0" Height="302" >
+                        <Border CornerRadius="15,15,15,15"  >
+                            <Grid Margin="8,8,8,8"  >
+                                <Button  FontSize="20" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+                      BorderBrush="{TemplateBinding BorderBrush}" 
+                      CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Text="Мойка" FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+
+
+                        <Border CornerRadius="15,15,15,15"  >
+                            <Grid Margin="8,8,8,8" >
+                                <Button  FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock x:Name="ServiceTextBlock" FontSize="20" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" Text="Обслуживание и ремонт" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="15,15,15,15" >
+                            <Grid Margin="8,8,8,8"  >
+                                <Button  FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE">
+
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Text="Бензин" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"/>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="15,15,15,15"  >
+                            <Grid Margin="8,8,8,8" >
+                                <Button  FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE" >
+
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Text="Страховка" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"/>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="15,15,15,15"  >
+                            <Grid Margin="8,8,8,8" >
+                                <Button  FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE" >
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Text="Доступность" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"/>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="15,15,15,15"  >
+                            <Grid Margin="8,8,8,8" >
+                                <Button  FontSize="48" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="White" Background="#FF5268BE">
+
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="35,35,35,35" BorderThickness="1,1,1,1" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock FontSize="36" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"><Run Text="Детские "/><Run Text="кресла"/></TextBlock>
+                            </Grid>
+                        </Border>
                     </UniformGrid>
+                    <StackPanel Background="White" Margin="0,100,0,0" >
+                        <TextBlock Text="Выбирай выгодный тариф" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"/>
+
+
+                        <UniformGrid Margin="100,0,150,0" >
+                            <Border Background="#FF5268BE" CornerRadius="5,5,5,5" Margin="20,20,10,10" Height="160">
+                                <Grid  >
+                                    <TextBlock Text="От" FontSize="48" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <TextBlock Text="Минута" FontSize="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White"/>
+                                    <TextBlock Text="8,5 Р" FontSize="48" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                </Grid>
+                            </Border>
+                            <Border Background="#FF5268BE" CornerRadius="5,5,5,5" Margin="10,20,20,10">
+                                <Grid >
+                                    <TextBlock Text="От" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48" Foreground="White" />
+                                    <TextBlock Text="60 минут" FontSize="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White"/>
+                                    <TextBlock Text="490 Р" FontSize="48" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                </Grid>
+
+                            </Border>
+                            <Border Background="#FF5268BE" CornerRadius="5,5,5,5" Margin="20,10,10,20">
+                                <Grid >
+                                    <TextBlock Text="От" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48" Foreground="White" />
+                                    <TextBlock Text="24 часа" FontSize="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White"/>
+                                    <TextBlock Text="2100 Р" FontSize="48" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                </Grid>
+                            </Border>
+                            <Border Background="#FF5268BE" CornerRadius="5,5,5,5" Margin="10,10,20,20" >
+                                <Grid >
+                                    <TextBlock Text="От" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48" Foreground="White" />
+                                    <TextBlock Text="Настраиваемый" FontSize="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap"/>
+                                    <TextBlock Text="4200 Р" FontSize="48" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                </Grid>
+                            </Border>
+                        </UniformGrid>
+                    </StackPanel>
+                    <StackPanel Background="White"  >
+                        <TextBlock Text="Наш парк" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"/>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="100,0,150,0" VerticalScrollBarVisibility="Disabled" >
+                        <StackPanel Height="270" Orientation="Horizontal" >
+                                <Button Content="◀️" Click="PrevButton_Click" Margin="0,50,0,70"/>
+                                <Image x:Name="CarImage" Stretch="UniformToFill" Height="240" Width="403"/>
+                                <Button Content="▶️" HorizontalAlignment="Right" Margin="0,50,130,70" Click="NextButton_Click" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+
+
+                    <StackPanel Margin="40,200,40,0" Background="White" >
+
+
+                        <TextBlock Text="Следуй правилам" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Background="White"/>
+                        <Button Content="К правилам" FontSize="36" Background="#FF5268BE" />
+
+                    </StackPanel>
                 </StackPanel>
             </Grid>
 

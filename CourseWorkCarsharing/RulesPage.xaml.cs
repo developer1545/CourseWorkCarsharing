@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CourseWorkCarsharing
 {
     /// <summary>
@@ -20,9 +22,18 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class RulesPage : Page
     {
+       
+
         public RulesPage()
         {
             InitializeComponent();
+           
+            DataContext = this; // Устанавливаем контекст данных
+           
         }
+
+        
+
+      
     }
 }

@@ -128,7 +128,7 @@
             <Grid/>
            
         </Grid>
-        <Button  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FFFFD400" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" >
+        <Button x:Name="ButtonOrder"  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FFFFD400" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" >
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" 
@@ -140,7 +140,7 @@
             </Button.Template>
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Opacity" Value="0.6"/>
+                    <Setter Property="Opacity" Value="0.8"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="1.0"/>

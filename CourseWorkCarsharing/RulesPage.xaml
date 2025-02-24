@@ -9,8 +9,49 @@
       Title="RulesPage">
 
     <Grid Background="#E6E6FA">
-        <Image ></Image>
-        <Button ></Button>
-        
+
+        <!--<StackPanel Background="White"  >
+            <TextBlock Text="Наш парк" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"/>
+          
+       
+                <ScrollViewer x:Name="ScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" Margin="100,0,150,0" >
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image  Source="/mashine/pngimg.com - citroen_PNG82.png" Stretch="UniformToFill" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Citroen DS3" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - ford_PNG102956.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Ford Focus" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - honda_PNG10350.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Honda Sivic" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - citroen_PNG82.png" Stretch="UniformToFill" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Citroen DS3" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - ford_PNG102956.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Ford Focus" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - honda_PNG10350.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Honda Sivic" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - citroen_PNG82.png" Stretch="UniformToFill" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Citroen DS3" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - ford_PNG102956.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Ford Focus" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                        <Image Source="/mashine/pngimg.com - honda_PNG10350.png" VerticalAlignment="Top" Height="240" Width="403" />
+                        <TextBlock Text="Honda Sivic" Margin="0,20,0,20" FontSize="18" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="#FF080808"/>
+                    </StackPanel>
+                </ScrollViewer>
+            
+          
+        </StackPanel>
+        <Grid >
+            <Button Content="◀️" Click="Button_Left_Click" HorizontalAlignment="Left" Margin="85,50,0,70" />
+            <Button Content="▶️" HorizontalAlignment="Right" Click="Button_Right_Click" Margin="0,50,130,70" />
+        </Grid> -->
+        <Grid>
+            <Grid>
+                
+
+               
+            </Grid>
+        </Grid>
     </Grid>
+
+
+
 </Page>
