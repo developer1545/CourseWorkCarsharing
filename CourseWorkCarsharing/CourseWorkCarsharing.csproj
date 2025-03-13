@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,13 +64,56 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Carsharing.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Carsharing.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carsharing.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carsharing.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Carsharing.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs" />
+    <Compile Include="pricingPlan.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pricingPlansPage.xaml.cs">
+      <DependentUpon>pricingPlansPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserData.cs">
+      <DependentUpon>Carsharing.tt</DependentUpon>
+    </Compile>
+    <Page Include="HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +130,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pricingPlansPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RulesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +157,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Carsharing.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Carsharing.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Carsharing.edmx.diagram">
+      <DependentUpon>Carsharing.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,6 +211,43 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="mashine\pngimg.com - honda_PNG10350.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Carsharing.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Carsharing.Context.cs</LastGenOutput>
+      <DependentUpon>Carsharing.edmx</DependentUpon>
+    </Content>
+    <Content Include="Carsharing.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Carsharing.edmx</DependentUpon>
+      <LastGenOutput>Carsharing.cs</LastGenOutput>
+    </Content>
+    <Resource Include="imageMain\11579259.png" />
+    <Resource Include="imageMain\12870046.png" />
+    <Resource Include="imageMain\1965904.png" />
+    <Resource Include="Rulles\18587139.png" />
+    <Resource Include="Rulles\11245537 %282%29.png" />
+    <Resource Include="Rulles\11245537 %281%29.png" />
+    <Resource Include="Rulles\5943491 %281%29.png" />
+    <Resource Include="Rulles\4809889.png" />
+    <Resource Include="Rulles\11245537.png" />
+    <Resource Include="Rulles\5943491.png" />
+    <Resource Include="Rulles\9190175.png" />
+    <Resource Include="Rulles\10748774.png" />
+    <Resource Include="Rulles\13096929.png" />
+    <Resource Include="Rulles\18571007.png" />
+    <Resource Include="Rulles\95935065.png" />
+    <Resource Include="Rulles\identify-icon-2.png" />
+    <Resource Include="Rulles\cinema_11560686 %282%29.png" />
+    <Resource Include="Rulles\cinema_11560686 %281%29.png" />
+    <Resource Include="Rulles\admin_16855894 %281%29.png" />
+    <Resource Include="Rulles\business-proposal_11923420.png" />
+    <Resource Include="Rulles\identify-icon-3.png" />
+    <Resource Include="Rulles\cinema_11560686.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

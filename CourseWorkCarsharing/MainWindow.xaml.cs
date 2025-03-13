@@ -27,8 +27,12 @@ namespace CourseWorkCarsharing
             MainFrame.Navigate(new MainPage());
             Manager.MainFrame = MainFrame;
             this.StateChanged += MainWindow_StateChanged;
+           
         }
-
+        private void UpdateBackButtonVisibility()
+        {
+            ButtonBack.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+        }
         private void MouseOutClick(object sender, RoutedEventArgs e)
         {
             Close();
@@ -44,15 +48,19 @@ namespace CourseWorkCarsharing
             if (this.WindowState == WindowState.Normal)
             {
                 this.WindowState = WindowState.Maximized;
+                //Кнопка заказа
+                /*
                 ButtonOrder.Width = 400;
                 ButtonOrder.Height = 80;
+                */
                
             }
             else
             {
                 this.WindowState = WindowState.Normal;
-                ButtonOrder.Width = 249;
-                ButtonOrder.Height = 53;
+                //ButtonOrder.Width = 249;
+                //ButtonOrder.Height = 53;
+                
             }
         }
         private void MainWindow_StateChanged(object sender, EventArgs e)
@@ -85,10 +93,41 @@ namespace CourseWorkCarsharing
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            UpdateBackButtonVisibility();
+        }
+
+        private void pricingPlansPClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new pricingPlansPage());
+        }
+
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Получаем NavigationService для текущего Frame
+            //var navigationService = MainFrame.NavigationService;
+
+            //// Проверяем, можно ли вернуться на предыдущую страницу
+            //if (navigationService.CanGoBack)
+            //{
+            //    navigationService.GoBack();
+            //}
+            if (MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+                UpdateBackButtonVisibility();
+            }
+
 
         }
-     
 
+        private void MainButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new MainPage());
+        }
 
+        private void HelpPageClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new HelpPage());
+        }
     }
 }

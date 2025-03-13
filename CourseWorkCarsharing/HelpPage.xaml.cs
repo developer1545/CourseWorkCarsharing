@@ -16,17 +16,28 @@ using System.Windows.Shapes;
 namespace CourseWorkCarsharing
 {
     /// <summary>
-    /// Логика взаимодействия для RulesPage.xaml
+    /// Логика взаимодействия для HelpPage.xaml
     /// </summary>
-    public partial class RulesPage : Page
+    public partial class HelpPage : Page
     {
-        public RulesPage()
+        public HelpPage()
         {
             InitializeComponent();
-           
         }
 
-      
+        private void ButtonMailClick(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void NumberTelephonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonTelegrammClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
