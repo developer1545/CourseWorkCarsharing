@@ -187,7 +187,7 @@ CornerRadius="10,10,10,10" BorderThickness="1,1,1,1" >
                             <UniformGrid Columns="4" Margin="20,10,20,0" Background="Blue">
                                 <Button Content="Правила" Foreground="White" Background="Blue" BorderBrush="Black" FontSize="20" Click="RulesButtonClick" />
                                 <Button Content="Помощь" Background="Blue" BorderBrush="Black" Foreground="White" FontSize="20" Click="HelpPageClick" />
-                                <Button Content="Тарифы" Background="Blue" BorderBrush="Black" Foreground="White" FontSize="20" />
+                                <Button Content="Тарифы" Background="Blue" BorderBrush="Black" Foreground="White" FontSize="20" Click="pricingPlansPClick" />
                                 <Button Content="Договор аренды" Background="Blue" BorderBrush="Black" Foreground="White" FontSize="20" />
                             </UniformGrid>
 

@@ -1,0 +1,251 @@
+﻿<Page x:Class="CourseWorkCarsharing.ParkAutoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseWorkCarsharing"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ParkAutoPage">
+
+    <Grid>
+        <Grid Background="#E6E6FA">
+            <ScrollViewer Margin="0,0,0,0" >
+                <StackPanel Margin="0,20,0,20" Background="White">
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="500*"/>
+                            <ColumnDefinition Width="100*"/>
+
+                        </Grid.ColumnDefinitions>
+                   
+                        <TextBlock Text="Автопарк" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" Grid.Column="1" />
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <TabControl HorizontalAlignment="Left"  BorderBrush="{x:Null}" >
+                            <TabItem Header="Бюджетные" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="6,2,6,2" Grid.IsSharedSizeScope="True" FontSize="18">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                    <Grid Margin="0,0,0,0" >
+
+                                        <TextBox x:Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" ></TextBox>
+
+                                        <ItemsControl x:Name="ItemsControlRes" Background="White" >
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal"  />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                        <Border.Background>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FFADE513"/>
+                                                                <GradientStop Color="#FF93BA26" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+                                                            <Grid Margin="5">
+                                                                <StackPanel >
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
+                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
+                                                                        </Image>
+                                                                    </Border>
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
+                                                                        <StackPanel >
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                                                        <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                        <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                    </StackPanel>
+                                                                    <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                    <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                    <TextBlock Text="{Binding Fuel_type,StringFormat={}Тип топлива: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                    <TextBlock Text="{Binding Transmission_box,StringFormat={}Коробка передач: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Mileage,StringFormat={}Пробег: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,0" />
+                                                                            <TextBlock Text="{Binding Status,StringFormat={}Статус: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,10" />
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>
+                            <TabItem Header="Премиум" BorderBrush="{x:Null}" Background="White" FontSize="18">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                    <Grid Margin="0,0,0,0" >
+
+                                        <TextBox x:Name="TBoxSearch1" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+
+                                        <ItemsControl x:Name="ItemsControlRes1" Background="White" >
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal"  />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                        <Border.Background>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FFE5C913"/>
+                                                                <GradientStop Color="#FFDDC318" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+                                                        <Grid Margin="5">
+                                                                <StackPanel >
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
+                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
+                                                                        </Image>
+                                                                    </Border>
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
+                                                                        <StackPanel >
+                                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                            </StackPanel>
+                                                                            <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Fuel_type,StringFormat={}Тип топлива: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Transmission_box,StringFormat={}Коробка передач: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Mileage,StringFormat={}Пробег: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,0" />
+                                                                            <TextBlock Text="{Binding Status,StringFormat={}Статус: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,10" />
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>
+                            <TabItem Header="Электро" BorderBrush="{x:Null}" Background="White" FontSize="18">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                    <Grid Margin="0,0,0,0" >
+
+                                        <TextBox x:Name="TBoxSearch2" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+
+                                        <ItemsControl x:Name="ItemsControlRes2" Background="White" >
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal"  />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                        <Border.Background>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FF13B9D6"/>
+                                                                <GradientStop Color="#FF18B6D1" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+                                                        <Grid Margin="5">
+                                                                <StackPanel >
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
+                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
+                                                                        </Image>
+                                                                    </Border>
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
+                                                                        <StackPanel >
+                                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                            </StackPanel>
+                                                                            <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Fuel_type,StringFormat={}Тип топлива: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Transmission_box,StringFormat={}Коробка передач: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Mileage,StringFormat={}Пробег: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,0" />
+                                                                            <TextBlock Text="{Binding Status,StringFormat={}Статус: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,10" />
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>
+                                <TabItem Header="Особые" BorderBrush="{x:Null}" Background="White" FontSize="18">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                        <Grid Margin="0,0,0,0" >
+
+                                            <TextBox x:Name="TBoxSearch3" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+
+                                            <ItemsControl x:Name="ItemsControlRes3" Background="White" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"  />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="#FFE55F13"/>
+                                                                    <GradientStop Color="#FFFF5C00" Offset="1"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                            <Grid Margin="5">
+                                                                <StackPanel >
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
+                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
+                                                                        </Image>
+                                                                    </Border>
+                                                                    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
+                                                                        <StackPanel >
+                                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                            </StackPanel>
+                                                                            <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Fuel_type,StringFormat={}Тип топлива: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Transmission_box,StringFormat={}Коробка передач: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
+                                                                            <TextBlock Text="{Binding Mileage,StringFormat={}Пробег: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,0" />
+                                                                            <TextBlock Text="{Binding Status,StringFormat={}Статус: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" Padding="0,0,0,10" />
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+                            </TabControl>
+                    </Grid>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

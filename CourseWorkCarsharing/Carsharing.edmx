@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище CarsharingBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="Id_auto" />
+          </Key>
+          <Property Name="Id_auto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="30" />
+          <Property Name="Year_of_release" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mileage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fuel_type" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Transmission_box" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Date_added" Type="date" Nullable="false" />
+          <Property Name="Insurance" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Date_of_last_service" Type="date" />
+        </EntityType>
         <EntityType Name="pricingPlans">
           <Key>
             <PropertyRef Name="Pricing_id" />
@@ -12,6 +32,7 @@
           <Property Name="Pricing_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Pricing_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Term" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="10" />
           <Property Name="Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -96,6 +117,7 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище CarsharingBDModelContainer">
+          <EntitySet Name="Auto" EntityType="Self.Auto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pricingPlans" EntityType="Self.pricingPlans" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -121,6 +143,26 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarsharingBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="Id_auto" />
+          </Key>
+          <Property Name="Id_auto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Colour" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Year_of_release" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mileage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fuel_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Transmission_box" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_added" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Insurance" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_last_service" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="pricingPlan">
           <Key>
             <PropertyRef Name="Pricing_id" />
@@ -128,6 +170,7 @@
           <Property Name="Pricing_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Pricing_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Term" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -180,7 +223,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CarsharingBDEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CarsharingBDEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autoes" EntityType="Self.Auto" />
           <EntitySet Name="pricingPlans" EntityType="Self.pricingPlan" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -236,13 +280,35 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CarsharingBDModelContainer" CdmEntityContainer="CarsharingBDEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CarsharingBDModelContainer" CdmEntityContainer="CarsharingBDEntities1">
+          <EntitySetMapping Name="Autoes">
+            <EntityTypeMapping TypeName="CarsharingBDModel.Auto">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id_auto" ColumnName="Id_auto" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="Year_of_release" ColumnName="Year_of_release" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Fuel_type" ColumnName="Fuel_type" />
+                <ScalarProperty Name="Transmission_box" ColumnName="Transmission_box" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_added" ColumnName="Date_added" />
+                <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+                <ScalarProperty Name="Date_of_last_service" ColumnName="Date_of_last_service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="pricingPlans">
             <EntityTypeMapping TypeName="CarsharingBDModel.pricingPlan">
               <MappingFragment StoreEntitySet="pricingPlans">
                 <ScalarProperty Name="Pricing_id" ColumnName="Pricing_id" />
                 <ScalarProperty Name="Pricing_name" ColumnName="Pricing_name" />
                 <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
               </MappingFragment>
             </EntityTypeMapping>

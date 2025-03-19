@@ -9,127 +9,183 @@
       Title="pricingPlansPage">
 
     <Grid Background="#E6E6FA">
-        <StackPanel Background="White" Margin="0,20,0,20" >
-            <TextBlock Text="Тарифы" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"/>
-            <TabControl HorizontalAlignment="Left" Margin="100,0,0,0" BorderBrush="{x:Null}" >
-                <TabItem Header="Бюджетные" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="6,2,6,2" Grid.IsSharedSizeScope="True" FontSize="18">
-                    <Grid Margin="0,0,0,0" >
+        <Grid Background="#E6E6FA">
+            <ScrollViewer Margin="0,0,0,0" >
+                <StackPanel Margin="0,20,0,20" Background="White">
 
-                        <TextBox x:Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
 
-                        <ItemsControl x:Name="ItemsControlRes" Background="White" Grid.RowSpan="4">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
-                                        <Border.Background>
-                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                <GradientStop Color="#FFE55F13"/>
-                                                <GradientStop Color="#FFFF5C00" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                        <Grid Margin="5">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="112*"/>
+                            <ColumnDefinition Width="339*"/>
+                     
+                            <ColumnDefinition Width="112*"/>
 
-                                            <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Тарифы" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" Grid.Column="1" />
+                        <StackPanel Background="White" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            
+                            <TabControl HorizontalAlignment="Left"  BorderBrush="{x:Null}" >
+                                <TabItem Header="Бюджетные" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="6,2,6,2" Grid.IsSharedSizeScope="True" FontSize="18">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                        <Grid Margin="0,0,0,0" >
 
-                                            <TextBlock Text="{Binding Term,StringFormat={}От: {0}}" Grid.Row="1" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"  />
-                                            <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+                                            <TextBox x:Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" ></TextBox>
+
+                                            <ItemsControl x:Name="ItemsControlRes" Background="White" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"  />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="#FFE55F13"/>
+                                                                    <GradientStop Color="#FFFF5C00" Offset="1"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+
+                                                                <TextBlock Text="{Binding Term,StringFormat={}От: {0}}" Grid.Row="1" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"  />
+                                                                <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Премиум" BorderBrush="{x:Null}" Background="White" FontSize="18">
-                    <Grid Margin="100,0,20,0" >
+                                    </ScrollViewer>
+                                </TabItem>
+                                <TabItem Header="Премиум" BorderBrush="{x:Null}" Background="White" FontSize="18">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                        <Grid Margin="0,0,0,0" >
 
-                        <TextBox x:Name="TBoxSearch1" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+                                            <TextBox x:Name="TBoxSearch1" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
 
-                        <ItemsControl x:Name="ItemsControlRes1" Background="White" Grid.RowSpan="4">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="20" Background="Black" BorderBrush="Blue" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
-                                        <Grid Margin="5">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
+                                            <ItemsControl x:Name="ItemsControlRes1" Background="White" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"  />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="#FFE55F13"/>
+                                                                    <GradientStop Color="#FFFF5C00" Offset="1"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
 
-                                            <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="22" Foreground="White" />
-                                            <Button Grid.Row="3"></Button>
-                                            <TextBlock Text="{Binding Term,StringFormat={}От: {0}}" Grid.Row="1" FontSize="22" Foreground="White"  />
-                                            <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="22" Foreground="White" />
+
+                                                                <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+
+                                                                <TextBlock Text="{Binding Term,StringFormat={}От: {0}}" Grid.Row="1" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"  />
+                                                                <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Электро" BorderBrush="{x:Null}" Background="White" FontSize="18">
-                    <Grid Margin="100,0,20,0" >
+                                    </ScrollViewer>
+                                </TabItem>
+                                <TabItem Header="Электро" BorderBrush="{x:Null}" Background="White" FontSize="18">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+                                        <Grid Margin="0,0,0,0" >
 
-                        <TextBox x:Name="TBoxSearch2" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+                                            <TextBox x:Name="TBoxSearch2" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
 
-                        <ItemsControl x:Name="ItemsControlRes2" Background="White" Grid.RowSpan="4">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="20" Background="Black" BorderBrush="Blue" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
-                                        <Grid Margin="5">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
+                                            <ItemsControl x:Name="ItemsControlRes2" Background="White" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"  />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="#FFE55F13"/>
+                                                                    <GradientStop Color="#FFFF5C00" Offset="1"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                            <Grid Margin="5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
 
-                                            <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="22" Foreground="White" />
-                                            <Button Grid.Row="3"></Button>
-                                            <TextBlock Text="{Binding Term,StringFormat={}От: {0}}" Grid.Row="1" FontSize="22" Foreground="White"  />
-                                            <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="22" Foreground="White" />
+
+                                                                <TextBlock Text="{Binding Pricing_name,StringFormat={}Тариф: {0}}" Grid.Row="0" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+
+                                                                <TextBlock Text="{Binding Term,StringFormat={}время: {0}}" Grid.Row="1" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold"  />
+                                                                <TextBlock Text="{Binding Cost,StringFormat={}{0} рублей}" Grid.Row="2" FontSize="30" Foreground="White" FontFamily="Tw Cen MT Condensed Extra Bold" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                                    </ScrollViewer>
+                                </TabItem>
+                            </TabControl>
+
+
+
+                        </StackPanel>
+                        <Border BorderBrush="Black" Grid.Column="1" Grid.Row="2" BorderThickness="1,1,1,1" >
+                        <StackPanel  Background="#FFDFDFDF"  >
+                                
+                            <TextBlock Text="1. Минутный тариф" Grid.Column="1" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock FontSize="16" Text="Идеальный вариант для коротких поездок по городу. Оплачивайте только за фактически использованное время. Подходит для тех, кто хочет быстро пересечь город, совершить небольшие поездки или воспользоваться автомобилем на короткое время. Минимальная стоимость – всего несколько рублей за минуту." TextWrapping="Wrap" Margin="10,0,10,0" ></TextBlock>
+                            <TextBlock Text="2. Часовой тариф" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                            <TextBlock FontSize="16" Text="Если вам нужно больше времени, чем на минутный тариф, выберитеHour тариф. Оплачивайте за каждый час использования автомобиля. Это отличный выбор для тех, кто планирует поездку по делам или прогулку с друзьями. Часовая ставка обычно более выгодна по сравнению с минутной." TextWrapping="Wrap" Margin="10,0,10,0"></TextBlock>
+                            <TextBlock Text="3. Суточный тариф" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                            <TextBlock FontSize="16" Text="Для длительных поездок или путешествий по городу идеально подойдет суточный тариф. Оплачивайте фиксированную сумму за сутки использования автомобиля. Это удобно для поездок на выходные или для тех, кто планирует провести целый день за рулем. В стоимость включены определенные километры, что делает этот вариант выгодным для дальних поездок." TextWrapping="Wrap" Margin="10,0,10,0"></TextBlock>
+                            <TextBlock Text="4. Недельный тариф" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock FontSize="16" Text="Если вам необходимо использовать автомобиль на протяжении всей недели, выберите недельный тариф. Это наиболее выгодный вариант для тех, кто планирует длительные поездки или командировки. Оплачивайте одну фиксированную сумму за неделю и получайте максимальную гибкость в использовании автомобиля. Включает дополнительные бонусы и скидки для регулярных клиентов." TextWrapping="Wrap" Margin="10,0,10,0" ></TextBlock>
+                            <TextBlock Text="Примечание" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock FontSize="18" Text="Все тарифы действуют по установленным условиям и ценам." TextWrapping="Wrap" Margin="10,0,10,20" ></TextBlock>
+                            </StackPanel>
+
+                        </Border>
+                        
                     </Grid>
-                </TabItem>
-            </TabControl>
-
-            <Grid Background="White">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-
-            </Grid>
-
-
-        </StackPanel>
+                </StackPanel>
+                
+            </ScrollViewer>
+        </Grid>
     </Grid>
+
 </Page>

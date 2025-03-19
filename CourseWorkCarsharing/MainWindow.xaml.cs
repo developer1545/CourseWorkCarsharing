@@ -129,5 +129,15 @@ namespace CourseWorkCarsharing
         {
             MainFrame.Navigate(new HelpPage());
         }
+
+        private void ButtonBusinessClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new BusinessPage());
+        }
+
+        private void ParkButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ParkAutoPage());
+        }
     }
 }

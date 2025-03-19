@@ -81,7 +81,7 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                        <Button x:Name="ButtonPark" Content="Парк " Background="{x:Null}"  FontSize="22" Margin="10,0,9,0" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" >
+                        <Button x:Name="ButtonPark"  Content="Парк " Background="{x:Null}"  FontSize="22" Margin="10,0,9,0" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" Click="ParkButtonClick" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Border Background="{TemplateBinding Background}" 
@@ -92,7 +92,7 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                        <Button x:Name="ButtonBusiness" Content="Для бизнеса " Background="{x:Null}"  FontSize="22" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" BorderThickness="0,0,1,0"  Grid.IsSharedSizeScope="True" Margin="10,0,10,0" >
+                        <Button x:Name="ButtonBusiness" Content="Для бизнеса " Click="ButtonBusinessClick" Background="{x:Null}"  FontSize="22" BorderBrush="White" Foreground="Lavender" FontFamily="Tw Cen MT Condensed Extra Bold" BorderThickness="0,0,1,0"  Grid.IsSharedSizeScope="True" Margin="10,0,10,0" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Border Background="{TemplateBinding Background}" 

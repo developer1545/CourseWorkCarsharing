@@ -149,5 +149,10 @@ namespace CourseWorkCarsharing
         {
             this.NavigationService.Navigate(new HelpPage());
         }
+
+        private void pricingPlansPClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new pricingPlansPage());
+        }
     }
 }
