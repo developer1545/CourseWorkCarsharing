@@ -32,7 +32,7 @@ namespace CourseWorkCarsharing
 
         private void RegisterCompanyClick(object sender, RoutedEventArgs e)
         {
-            
+            this.NavigationService.Navigate(new RegisterPage());
         }
     }
 }

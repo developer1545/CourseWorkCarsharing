@@ -38,7 +38,7 @@ namespace CourseWorkCarsharing
         public MainPage()
         {
             InitializeComponent();
-            Images = new ObservableCollection<ImageItem>
+           /* Images = new ObservableCollection<ImageItem>
             {
                     new ImageItem { ImagePath = "mashine\\pngimg.com - citroen_PNG82.png" },
                     new ImageItem { ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\pngimg.com - honda_PNG10350.png" },
@@ -53,6 +53,7 @@ namespace CourseWorkCarsharing
             DataContext = this;
             currentIndex = 0;
             UpdateImage();
+           */
         }
     
         private void UpdateImage()

@@ -155,7 +155,7 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
             <Grid/>
 
         </Grid>
-       <!-- <Button x:Name="ButtonOrder"  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FF5268BE" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+       <Button x:Name="ButtonOrder"  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FF5268BE" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" 
@@ -177,6 +177,6 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                 </Style>
             </Button.Style>
         </Button>
-        -->
+       
     </Grid>
 </Window>

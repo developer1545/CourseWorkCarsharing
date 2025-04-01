@@ -37,15 +37,16 @@
                             <ColumnDefinition Width="100*"/>
 
                         </Grid.ColumnDefinitions>
-                   
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Примечание: Автомобили на странице 'Особые' не соответствуют ни одному из предложенных тарифов, поэтому для получения цены, пожалуйста, свяжитесь с нашим оператором." FontSize="20" TextWrapping="WrapWithOverflow"></TextBlock>
                         <TextBlock Text="Автопарк" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" Grid.Column="1" />
                         <Grid Grid.Column="1" Grid.Row="1">
                             <TabControl HorizontalAlignment="Left"  BorderBrush="{x:Null}" >
                             <TabItem Header="Бюджетные" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="6,2,6,2" Grid.IsSharedSizeScope="True" FontSize="18">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
                                     <Grid Margin="0,0,0,0" >
+                                           
 
-                                        <TextBox x:Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" ></TextBox>
+                                            <TextBox x:Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" ></TextBox>
 
                                         <ItemsControl x:Name="ItemsControlRes" Background="White" >
                                             <ItemsControl.ItemsPanel>
@@ -65,14 +66,13 @@
                                                             <Grid Margin="5">
                                                                 <StackPanel >
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
-                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
-                                                                        </Image>
+                                                                        <Image Source="{Binding Image}"  Width="400" Height="228" Stretch="UniformToFill" StretchDirection="Both"/>
                                                                     </Border>
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
                                                                         <StackPanel >
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                                                        <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
-                                                                        <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                        <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
+                                                                        <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
                                                                     </StackPanel>
                                                                     <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
                                                                     <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
@@ -94,8 +94,8 @@
                             <TabItem Header="Премиум" BorderBrush="{x:Null}" Background="White" FontSize="18">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
                                     <Grid Margin="0,0,0,0" >
-
-                                        <TextBox x:Name="TBoxSearch1" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+                                            
+                                            <TextBox x:Name="TBoxSearch1" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
 
                                         <ItemsControl x:Name="ItemsControlRes1" Background="White" >
                                             <ItemsControl.ItemsPanel>
@@ -108,21 +108,21 @@
                                                     <Border Margin="20" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
                                                         <Border.Background>
                                                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                                <GradientStop Color="#FFE5C913"/>
-                                                                <GradientStop Color="#FFDDC318" Offset="1"/>
+                                                                <GradientStop Color="#FFE5E013"/>
+                                                                <GradientStop Color="#FFD7D320" Offset="1"/>
                                                             </LinearGradientBrush>
                                                         </Border.Background>
                                                         <Grid Margin="5">
                                                                 <StackPanel >
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
-                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
-                                                                        </Image>
+                                                                        <Image Source="{Binding Image}" Width="400" Height="228" Stretch="UniformToFill"/>
+
                                                                     </Border>
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
                                                                         <StackPanel >
                                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
-                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
                                                                             </StackPanel>
                                                                             <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
                                                                             <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
@@ -144,8 +144,9 @@
                             <TabItem Header="Электро" BorderBrush="{x:Null}" Background="White" FontSize="18">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
                                     <Grid Margin="0,0,0,0" >
+                                           
 
-                                        <TextBox x:Name="TBoxSearch2" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
+                                            <TextBox x:Name="TBoxSearch2" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
 
                                         <ItemsControl x:Name="ItemsControlRes2" Background="White" >
                                             <ItemsControl.ItemsPanel>
@@ -165,14 +166,13 @@
                                                         <Grid Margin="5">
                                                                 <StackPanel >
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
-                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
-                                                                        </Image>
+                                                                        <Image Source="{Binding Image}" Width="400" Height="228" Stretch="Fill"/>
                                                                     </Border>
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
                                                                         <StackPanel >
                                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
-                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
                                                                             </StackPanel>
                                                                             <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
                                                                             <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
@@ -194,6 +194,7 @@
                                 <TabItem Header="Особые" BorderBrush="{x:Null}" Background="White" FontSize="18">
                                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
                                         <Grid Margin="0,0,0,0" >
+                        
 
                                             <TextBox x:Name="TBoxSearch3" TextChanged="TBoxSearch_TextChanged" Background="{x:Null}" Grid.RowSpan="4"></TextBox>
 
@@ -215,14 +216,13 @@
                                                             <Grid Margin="5">
                                                                 <StackPanel >
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0">
-                                                                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\mashine\pngimg.com - ford_PNG102956.png" Width="256" Height="256">
-                                                                        </Image>
+                                                                        <Image Source="{Binding Image}" Width="400" Height="228" Stretch="UniformToFill" />
                                                                     </Border>
                                                                     <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0,0,5,5" >
                                                                         <StackPanel >
                                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
-                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="30" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Mark,StringFormat={}{0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
+                                                                                <TextBlock Text="{Binding Model,StringFormat={} {0}}"  FontSize="24" Foreground="White" FontFamily="Snap ITC" />
                                                                             </StackPanel>
                                                                             <TextBlock Text="{Binding Colour,StringFormat={}Цвет: {0} }"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />
                                                                             <TextBlock Text="{Binding Year_of_release ,StringFormat={}Год выпуска: {0}}"  FontSize="20" Foreground="White" FontFamily="Bernard MT Condensed" />

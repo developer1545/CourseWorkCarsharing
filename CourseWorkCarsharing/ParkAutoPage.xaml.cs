@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,42 +29,77 @@ namespace CourseWorkCarsharing
             UpdatePark();
             DataContext = this;
         }
+        /*private BitmapImage ConvertByteArrayToImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0)
+            {
+                return null; // или вернуть изображение по умолчанию
+            }
+
+            using (var stream = new MemoryStream(imageData))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = stream;
+                image.EndInit();
+                image.Freeze(); // Замораживаем объект для использования в других потоках
+                return image;
+            }
+        }
+        */
         private void UpdatePark(int? id = null)
         {
             var currentPricing = CarsharingBDEntities1.GetContext().Autoes.ToList();
-            var currentPricing1 = CarsharingBDEntities1.GetContext().Autoes.ToList();
-            var currentPricing2 = CarsharingBDEntities1.GetContext().Autoes.ToList();
-            var currentPricing3 = CarsharingBDEntities1.GetContext().Autoes.ToList();
 
+            // Фильтрация по типу
+            var budgetCars = currentPricing.Where(p => p.Type.Trim() == "Бюджет").ToList();
+            var premiumCars = currentPricing.Where(p => p.Type.Trim() == "Премиум").ToList();
+            var electricCars = currentPricing.Where(p => p.Type.Trim() == "Электро").ToList();
+            var specialCars = currentPricing.Where(p => p.Type.Trim() == "Особый").ToList();
 
-            // Фильтрация по Id, если он предоставлен
-
-            //var typeById = currentTours.FirstOrDefault(p => p.Type == "Бюджет    ");
-            /*if (typeById != null)
+           /* // Преобразование изображений
+            foreach (var car in budgetCars)
             {
-                currentTours = new List<pricingPlan> { typeById }; // Создаем новый список с одним элементом
-            }
-            else
-            {
-                currentTours = new List<pricingPlan>(); // Если по Id ничего не найдено, возвращаем пустой список
+                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
             }
 
-      */
-            currentPricing = currentPricing.Where(p => p.Type.Trim() == "Бюджет").ToList();
-            currentPricing1 = currentPricing1.Where(p => p.Type.Trim() == "Премиум").ToList();
-            currentPricing2 = currentPricing2.Where(p => p.Type.Trim() == "Электро").ToList();
-            currentPricing3 = currentPricing3.Where(p => p.Type.Trim() == "Особый").ToList();
+            foreach (var car in premiumCars)
+            {
+                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
+            }
 
+            foreach (var car in electricCars)
+            {
+                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
+            }
+
+            foreach (var car in specialCars)
+            {
+                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
+            }
+           */
             // Установка источника данных
-            ItemsControlRes.ItemsSource = currentPricing.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes1.ItemsSource = currentPricing1.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes2.ItemsSource = currentPricing2.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes3.ItemsSource = currentPricing3.OrderBy(p => p.Quantity).ToList();
-
+            ItemsControlRes.ItemsSource = budgetCars.OrderBy(p => p.Quantity).ToList();
+            ItemsControlRes1.ItemsSource = premiumCars.OrderBy(p => p.Quantity).ToList();
+            ItemsControlRes2.ItemsSource = electricCars.OrderBy(p => p.Quantity).ToList();
+            ItemsControlRes3.ItemsSource = specialCars.OrderBy(p => p.Quantity).ToList();
         }
+
+
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdatePark();
         }
+        public class Autoes
+        {
+            // Ваши существующие свойства
+            public byte[] ImageData { get; set; }
+
+            // Новое свойство для привязки изображения
+            [NotMapped] // Не сохранять в БД
+            public BitmapImage ImageSource { get; set; }
+        }
+
     }
 }

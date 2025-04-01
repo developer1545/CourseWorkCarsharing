@@ -101,6 +101,9 @@
     <Compile Include="pricingPlansPage.xaml.cs">
       <DependentUpon>pricingPlansPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pricingPlansPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,18 +225,6 @@
     <Resource Include="imageMain\AvailabilityM.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mashine\pngimg.com - citroen_PNG82.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mashine\pngimg.com - bmw_PNG99532.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mashine\pngimg.com - ford_PNG102956.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mashine\pngimg.com - honda_PNG10350.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="imageMain\11579259.png" />
     <Resource Include="imageMain\12870046.png" />
     <Resource Include="imageMain\1965904.png" />
@@ -270,6 +265,20 @@
       <DependentUpon>Carsharing.edmx</DependentUpon>
       <LastGenOutput>Carsharing.cs</LastGenOutput>
     </Content>
+    <Resource Include="mashine\Ford Focus.png" />
+    <Resource Include="mashine\Toyota Corola.png" />
+    <Resource Include="mashine\Audi A4.png" />
+    <Resource Include="mashine\BMW X5.png" />
+    <Resource Include="mashine\Fiat 500.png" />
+    <Resource Include="mashine\Kia Sportage.png" />
+    <Resource Include="mashine\Lexus NX.png" />
+    <Resource Include="mashine\Mercedec CLE Cabriolet.png" />
+    <Resource Include="mashine\Mercedec CLE Coupe.png" />
+    <Resource Include="mashine\Mercedec S - Class.png" />
+    <Resource Include="mashine\Tesla Model 3.png" />
+    <Resource Include="mashine\Tesla Model X.png" />
+    <Resource Include="mashine\Volvo XC 60.png" />
+    <Resource Include="mashine\Wolswagen Golf.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
