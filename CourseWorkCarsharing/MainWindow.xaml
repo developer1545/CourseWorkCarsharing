@@ -12,16 +12,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                
+
             </Grid.RowDefinitions>
             <Grid Background="Black" Margin="0,0,0,0" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="330*"/>
-                        <ColumnDefinition Width="500*" />
-                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="149*"/>
+                        <ColumnDefinition Width="439*" />
+                        <ColumnDefinition Width="212*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="ButtonMain" Content="АвтоНаПрокат " Foreground="#FF30BCFF" BorderBrush="White" Click="MainButtonClick" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Grid.Column="0" Margin="20,0,0,0" FontFamily="Segoe Script" >
+                    <Button x:Name="ButtonMain" Content="АвтоНаПрокат " Foreground="#FF30BCFF" BorderBrush="White" Click="MainButtonClick" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Grid.Column="0" Margin="20,0,0,0" FontFamily="Segoe Script" Grid.ColumnSpan="2" Height="38" Width="209" >
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Background="{TemplateBinding Background}" 
@@ -33,7 +33,7 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,0,0" >
                         </Button.Template>
                     </Button>
                     <StackPanel x:Name="StackP" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        
+
                         <Button x:Name="ButtonBack" Content="⬅️ " Foreground="Lavender" BorderBrush="White" Click="BackButtonClick" Background="{x:Null}" FontFamily="Segoe UI Emoji" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="0,0,10,0"  >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
@@ -103,7 +103,17 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-
+                        <Button  Content="🚪Вход" Foreground="Lavender" BorderBrush="White" Click="ButtonAccountEnterClikc" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0,0,10,0" FontFamily="Tw Cen MT Condensed Extra Bold"  >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="0,0,0,0" BorderThickness="0,0,0,0" >
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </StackPanel>
 
                     <Border BorderThickness="1,1,1,1" Height="40" Width="131" Grid.Column="2" CornerRadius="1,1,1,1" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -144,6 +154,7 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -155,12 +166,12 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
             <Grid/>
 
         </Grid>
-       <Button x:Name="ButtonOrder"  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FF5268BE" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+        <Button x:Name="ButtonOrder"  FontSize="46" Content="ЗАКАЗАТЬ" Background="#FF30BCFF" BorderBrush="Black" Foreground="Black" VerticalContentAlignment="Top" Margin="0,0,20,20" FontFamily="Tw Cen MT Condensed Extra Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="OrderButtonClick" >
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" 
-           BorderBrush="{TemplateBinding BorderBrush}" 
-           CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" >
+    BorderBrush="{TemplateBinding BorderBrush}" 
+    CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" >
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -177,6 +188,6 @@ CornerRadius="0,0,0,0" BorderThickness="0,0,1,0" >
                 </Style>
             </Button.Style>
         </Button>
-       
+
     </Grid>
 </Window>

@@ -15,6 +15,7 @@
                 <StackPanel Margin="0,20,0,20" Background="White">
 
                     <Grid >
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -38,9 +39,10 @@
                             <ColumnDefinition Width="100*"/>
 
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Text="Регистрация" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" Grid.Column="1" />
-                        <Grid Grid.Row="1" Grid.Column="1" Margin="0,10,0,0">
+                        <Image Source="C:\Users\antom\source\repos\CourseWorkCarsharing\CourseWorkCarsharing\LogImage\logImage.jpg" Grid.ColumnSpan="3" Grid.RowSpan="5" Stretch="UniformToFill" />
+                        <Rectangle Fill="White" Grid.RowSpan="5" Grid.Column="1" Opacity="0.9" RadiusX="35" RadiusY="35" Margin="0,20,0,20" ></Rectangle>
+                        <TextBlock Text="Регистрация" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" Grid.Column="1" Margin="0,20,0,0" />
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="10,10,10,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -55,7 +57,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Общие данные" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Monotype Corsiva" Margin="0,0,0,20"/>
+                            <TextBlock Text="Общие данные" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20" FontFamily="Times New Roman"/>
                             <StackPanel Grid.Row="1" >
                                 <TextBlock  Text="Логин" FontSize="22" />
                                 <TextBlock   />
@@ -72,7 +74,7 @@
                                 <TextBlock Text="Дата рождения" FontSize="22" />
                                 <TextBlock   />
                             </StackPanel>
-                            <TextBlock Text="Паспорт" FontSize="24" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.ColumnSpan="2" FontFamily="Monotype Corsiva" Margin="0,0,0,20"/>
+                            <TextBlock Text="Паспорт" FontSize="24" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.ColumnSpan="2" FontFamily="Times New Roman" Margin="0,0,0,20"/>
                             <StackPanel Grid.Row="3" >
 
                                 <TextBlock Text="Серия паспорта" FontSize="22" />
@@ -86,7 +88,7 @@
                                 <TextBlock Text="Код подразделения" FontSize="22" />
                                 <TextBlock   />
                             </StackPanel>
-                            <TextBlock Text="Водительское удостоверение" Grid.ColumnSpan="2" FontSize="24" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Monotype Corsiva" Margin="0,0,0,20" />
+                            <TextBlock Text="Водительское удостоверение" Grid.ColumnSpan="2" FontSize="24" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Times New Roman" Margin="0,0,0,20" />
                             <StackPanel  Grid.Row="5" Margin="0,0,0,20"> 
                                
                                 <TextBlock Text="Дата выдачи водительских прав" FontSize="22" />
@@ -104,21 +106,30 @@
                                 <TextBlock Text="Введите категории водительских прав" FontSize="22" />
                                 <TextBlock />
                             </StackPanel>
+                            <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,0,20">
+                                <Button  Content=" Зарегистрироваться " Margin="0,10,0,20" FontSize="24" Background="#FF30BCFF" Foreground="Black" VerticalAlignment="Center" BorderBrush="Black" HorizontalAlignment="Center">
+                                    
+                        
+
+                                </Button>
+                            </StackPanel>
 
 
                      
                             <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBox x:Name="LoginBox" FontSize="20" TextChanged="LoginTextChanged" />
+                                <TextBox x:Name="LoginBox" FontSize="20" TextChanged="LoginTextChanged" BorderBrush="Black" />
                                 <TextBlock   x:Name="LoginBoxHint"  Foreground="Blue" />
-                                <PasswordBox x:Name="PasswordBox" FontSize="20" />
+                                <PasswordBox x:Name="PasswordBox" FontSize="20" BorderBrush="Black" />
+                                <TextBox x:Name="textBox" Visibility="Collapsed"  FontSize="20" BorderBrush="Black"/>
+                                <CheckBox x:Name="showPasswordCheckBox" Content="Показать пароль 🔒" Checked="ShowPasswordCheckBox_Checked" Unchecked="ShowPasswordCheckBox_Unchecked" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black"/>
                                 <TextBlock   />
-                                <TextBox x:Name="NumberPhoneBox" TextChanged="NumberPhoneBoxChanged"  FontSize="20" />
+                                <TextBox x:Name="NumberPhoneBox" TextChanged="NumberPhoneBoxChanged"  FontSize="20" BorderBrush="Black" />
                                 <TextBlock  x:Name="NumPhoHint" Foreground="Blue" />
-                                <TextBox x:Name="MailAdressBox" FontSize="20" TextChanged="MailAdressChanged" />
+                                <TextBox x:Name="MailAdressBox" FontSize="20" TextChanged="MailAdressChanged" BorderBrush="Black" />
                                 <TextBlock  x:Name="MailAdrHint" Foreground="Blue" />
-                                <TextBox x:Name="NameBox" FontSize="20" />
+                                <TextBox x:Name="NameBox" FontSize="20" BorderBrush="Black" />
                                 <TextBlock   />
-                                <TextBox x:Name="FamilyBox" FontSize="20" />
+                                <TextBox x:Name="FamilyBox" FontSize="20" BorderBrush="Black" />
                                 <TextBlock  Margin="0,5,0,5"   />
                                 <Grid >
                                     <Grid.ColumnDefinitions>
@@ -133,11 +144,11 @@
                                 <TextBlock   />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Grid.Row="3">
-                                <TextBox x:Name="SerialPasswordPaBox" TextChanged="SeriaChanged"  FontSize="20" />
+                                <TextBox x:Name="SerialPasswordPaBox" TextChanged="SeriaChanged"  FontSize="20" BorderBrush="Black" />
                                 <TextBlock  x:Name="SerialPHint" Foreground="Blue"/>
-                                <TextBox x:Name="NumberPasswordBox" TextChanged="NumberChanged"  FontSize="20" />
+                                <TextBox x:Name="NumberPasswordBox" TextChanged="NumberChanged"  FontSize="20" BorderBrush="Black" />
                                 <TextBlock  x:Name="NumberPHint" Foreground="Blue"/>
-                                <TextBox FontSize="20" />
+                                <TextBox FontSize="20" BorderBrush="Black" />
                                 <TextBlock  />
                                 <Grid >
                                     <Grid.ColumnDefinitions>
@@ -150,7 +161,7 @@
                                     <ComboBox Grid.Column="2" SelectedIndex="0" x:Name="YearComboBox2"/>
                                 </Grid>
                                 <TextBlock   />
-                                <TextBox FontSize="20" />
+                                <TextBox FontSize="20" BorderBrush="Black" />
                             </StackPanel>
                             <StackPanel Grid.Row="5" Grid.Column="1" Margin="0,0,0,20">
                                 <Grid >
@@ -199,15 +210,15 @@
                                     <ComboBox Grid.Column="2" SelectedIndex="0" x:Name="YearComboBox6"/>
                                 </Grid>
                                 <TextBlock Margin="0,0,0,10"/>
-                                <TextBox FontSize="20"  />
+                                <TextBox FontSize="20" BorderBrush="Black"  />
                                 <TextBlock  />
-                                <TextBox x:Name="SerialAutoPaBox" TextChanged="SeriaAuChanged" FontSize="20" />
+                                <TextBox x:Name="SerialAutoPaBox" TextChanged="SeriaAuChanged" FontSize="20" BorderBrush="Black" />
                                 <TextBlock  x:Name="SerialAutoHint" Foreground="Blue" />
-                                <TextBox  x:Name="NumberAutoPaBox"  TextChanged="NumberAuChanged" FontSize="20" />
+                                <TextBox  x:Name="NumberAutoPaBox"  TextChanged="NumberAuChanged" FontSize="20" BorderBrush="Black" />
                                 <TextBlock    x:Name="NumberAutoHint" Foreground="Blue" />
-                                <TextBox  FontSize="20" />
+                                <TextBox  FontSize="20" BorderBrush="Black"/>
                                 <TextBlock   />
-                                <TextBox  FontSize="20" />
+                                <TextBox  FontSize="20" BorderBrush="Black"/>
                                 <TextBlock   />
 
 

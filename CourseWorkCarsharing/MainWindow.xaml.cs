@@ -431,5 +431,14 @@ namespace CourseWorkCarsharing
             }
         }
 
+        private void ButtonAccountEnterClikc(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new LoginPage());
+        }
+
+        private void OrderButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OrderPage());
+        }
     }
 }

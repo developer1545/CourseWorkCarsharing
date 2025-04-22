@@ -80,7 +80,7 @@ namespace CourseWorkCarsharing
 
             // Заполнение ComboBox для годов (например, от 1900 до текущего года)
             int currentYear = DateTime.Now.Year;
-            for (int i = currentYear;i <= yearStart; i++)
+            for (int i = currentYear; i <= yearStart; i++)
             {
                 yearComboBox.Items.Add(i);
             }
@@ -117,7 +117,7 @@ namespace CourseWorkCarsharing
 
         public static string FormatPhoneNumber(string phone)
         {
-           
+
 
             Regex regex = new Regex(@"[^\d]");
             phone = regex.Replace(phone, "");
@@ -177,7 +177,7 @@ namespace CourseWorkCarsharing
             {
                 LoginBoxHint.Text = "";
             }
-            }
+        }
 
         private void SeriaChanged(object sender, TextChangedEventArgs e)
         {
@@ -226,8 +226,24 @@ namespace CourseWorkCarsharing
                 NumberAutoHint.Text = "";
             }
         }
+
+        private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox.Visibility = Visibility.Visible;
+            textBox.Text = PasswordBox.Password;
+            PasswordBox.Visibility = Visibility.Collapsed;
+            showPasswordCheckBox.Content = "Скрыть пароль 🔓";
+        }
+        private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PasswordBox.Visibility = Visibility.Visible;
+            PasswordBox.Password = textBox.Text;
+            textBox.Visibility = Visibility.Collapsed;
+            showPasswordCheckBox.Content = "Показать пароль 🔒";
+        }
+
     }
-    }
+}
 
 
 
