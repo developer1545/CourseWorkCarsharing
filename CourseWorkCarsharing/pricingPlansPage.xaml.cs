@@ -23,16 +23,16 @@ namespace CourseWorkCarsharing
         public pricingPlansPage()
         {
             InitializeComponent();
-            var allTypes = CarsharingBDEntities1.GetContext().pricingPlans.ToList();
+            var allTypes = CarsharingBDEntities.GetContext().pricingPlans.ToList();
             UpdatePricing();
           
             DataContext = this;
         }
         private void UpdatePricing(int? id = null)
         {
-            var currentPricing = CarsharingBDEntities1.GetContext().pricingPlans.ToList();
-            var currentPricing1 = CarsharingBDEntities1.GetContext().pricingPlans.ToList();
-            var currentPricing2 = CarsharingBDEntities1.GetContext().pricingPlans.ToList();
+            var currentPricing = CarsharingBDEntities.GetContext().pricingPlans.ToList();
+            var currentPricing1 = CarsharingBDEntities.GetContext().pricingPlans.ToList();
+            var currentPricing2 = CarsharingBDEntities.GetContext().pricingPlans.ToList();
 
 
             // Фильтрация по Id, если он предоставлен

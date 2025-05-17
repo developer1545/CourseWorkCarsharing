@@ -14,30 +14,30 @@ namespace CourseWorkCarsharing
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
-    public partial class CarsharingBDEntities1 : DbContext
+    using System.Runtime.Remoting.Contexts;
+
+    public partial class CarsharingBDEntities : DbContext
     {
-        private static CarsharingBDEntities1 _DContext;
-        public CarsharingBDEntities1()
-            : base("name=CarsharingBDEntities1")
+        private static  CarsharingBDEntities _context;
+        public CarsharingBDEntities()
+            : base("name=CarsharingBDEntities2")
         {
         }
-        public static CarsharingBDEntities1 GetContext()
+        public static CarsharingBDEntities GetContext()
         {
-            if (_DContext == null)
+            if (_context == null)
             {
-                _DContext = new CarsharingBDEntities1();
+                _context = new CarsharingBDEntities();
             }
-            return _DContext;
-          
-    }
-       
+            return _context;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Auto> Autoes { get; set; }
+        public virtual DbSet<Parking> Parkings { get; set; }
         public virtual DbSet<pricingPlan> pricingPlans { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }

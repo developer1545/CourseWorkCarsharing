@@ -1,0 +1,50 @@
+﻿<Window x:Class="CourseWorkCarsharing.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWorkCarsharing"
+        mc:Ignorable="d"
+        Title="MessageWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid >
+            <Grid Background="#E6E6FA" >
+                <StackPanel Margin="0,20,0,20" Background="White">
+                    <Grid Margin="0,20,0,20"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="500*"/>
+                            <ColumnDefinition Width="100*"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="1" Text="Окно подтверждения" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" ></TextBlock>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <TextBlock Text="Вы выбрали:"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="2" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Margin="5" Grid.Column="0" x:Name="WindowText" Text="Это проверка шрифта его размера." FontSize="24" Grid.ColumnSpan="2" TextWrapping="Wrap"></TextBlock>
+                            <Button Margin="5" Grid.Column="1" x:Name="WindowButton" Content="Это кнопка" FontSize="20" MaxWidth="300" MaxHeight="30" ></Button>
+                        </Grid>
+
+
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

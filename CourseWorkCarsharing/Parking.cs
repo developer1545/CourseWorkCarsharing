@@ -12,17 +12,11 @@ namespace CourseWorkCarsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class UserData
+    public partial class Parking
     {
-        public Nullable<int> UserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Patronymic { get; set; }
-        public int PassportNumber { get; set; }
-        public string PassportIssuedBy { get; set; }
-        public System.DateTime PassportIssueDate { get; set; }
-        public Nullable<System.DateTime> PassportExpirationDate { get; set; }
-    
-        public virtual User User { get; set; }
+        public int ID_Парковки { get; set; }
+        public string Тип_парковки { get; set; }
+        public string Название { get; set; }
+        public string Расположение { get; set; }
     }
 }

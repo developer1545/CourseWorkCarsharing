@@ -39,252 +39,28 @@ namespace CourseWorkCarsharing
     }
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Navigate(new MainPage());
             Manager.MainFrame = MainFrame;
             this.StateChanged += MainWindow_StateChanged;
-/*
-            List<Car> cars = new List<Car>
-    {
-        new Car
-        {
-            Mark = "Audi",
-            Model = "A4",
-            Colour = "Белый",
-            YearOfRelease = 2020,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Audi A4.png",
-            Quantity = 5,
-            Type = "Бюджет",
-            Mileage = 15000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-6)
-        },
-        new Car
-        {
-            Mark = "BMW",
-            Model = "X5",
-            Colour = "Тёмно синий",
-            YearOfRelease = 2019,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\BMW X5.png",
-            Quantity = 3,
-            Type = "Бюджет",
-            Mileage = 30000,
-            FuelType = "Дизель",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-12)
-        },
-        new Car
-        {
-            Mark = "Mercedes",
-            Model = "S-Class",
-            Colour = "Синий",
-            YearOfRelease = 2021,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Mercedec S - Class.png",
-            Quantity = 4,
-            Type = "Премиум",
-            Mileage = 5000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-1)
-        },
-        new Car
-        {
-            Mark = "Volkswagen",
-            Model = "Golf",
-            Colour = "Белый",
-            YearOfRelease = 2018,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Wolswagen Golf.png",
-            Quantity = 6,
-            Type = "Бюджет",
-            Mileage = 25000,
-            FuelType = "Бензин",
-            TransmissionBox = "Механика",
-            Status = "Продан",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-8)
-        },
-        new Car
-        {
-            Mark = "Toyota",
-            Model = "Corola",
-            Colour = "Серый",
-            YearOfRelease = 2020,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Toyota Corola.png",
-            Quantity = 2,
-            Type = "Бюджет",
-            Mileage = 20000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-3)
-        },
-        new Car
-        {
-            Mark = "Tesla",
-            Model = "Model X",
-            Colour = "Белый",
-            YearOfRelease = 2021,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Tesla Model X.png",
-            Quantity = 4,
-            Type = "Электро",
-            Mileage = 15000,
-            FuelType = "Электричество",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-2)
-        },
-         new Car
-        {
-            Mark = "Tesla",
-            Model = "Model 3",
-            Colour = "Синий",
-            YearOfRelease = 2021,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Tesla Model 3.png",
-            Quantity = 4,
-            Type = "Электро",
-            Mileage = 15000,
-            FuelType = "Электричество",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-2)
-        },
-        new Car
-        {
-            Mark = "Kia",
-            Model = "Sportage",
-            Colour = "Серый",
-            YearOfRelease = 2019,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Kia Sportage.png",
-            Quantity = 1,
-            Type = "Бюджет",
-            Mileage = 18000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-5)
-        },
-
-        new Car
-        {
-            Mark = "Ford",
-            Model = "Focus",
-            Colour = "Синий",
-            YearOfRelease = 2018,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Ford Focus.png",
-            Quantity = 5,
-            Type = "Бюджет",
-            Mileage = 30000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-10)
-        },
-
-        new Car
-        {
-            Mark = "Mercedec",
-            Model = "CLE Cabriolet",
-            Colour = "Красный",
-            YearOfRelease = 2021,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Mercedec CLE Cabriolet.png",
-            Quantity = 3,
-            Type = "Премиум",
-            Mileage = 5000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-1)
-        },
-        new Car
-        {
-            Mark = "Mercedes",
-            Model = "CLE Coupe",
-            Colour = "Коричневый",
-            YearOfRelease = 2020,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Mercedec CLE Coupe.png",
-            Quantity = 5,
-            Type = "Премиум",
-            Mileage = 15000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-3)
-        },
-        new Car
-        {
-            Mark = "Volvo",
-            Model = "XC60",
-            Colour = "Синий",
-            YearOfRelease = 2021,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Volvo XC 60.png",
-            Quantity = 3,
-            Type = "Премиум",
-            Mileage = 7000,
-            FuelType = "Бензин",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-1)
-        },
-        new Car
-        {
-            Mark = "Lexus",
-            Model = "NX",
-            Colour = "Белый",
-            YearOfRelease = 2020,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Lexus NX.png",
-            Quantity = 2,
-            Type = "Бюджет",
-            Mileage = 8000,
-            FuelType = "Гибрид",
-            TransmissionBox = "Автомат",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-2)
-        },
-        new Car
-        {
-            Mark = "Fiat",
-            Model = "500",
-            Colour = "Белый",
-            YearOfRelease = 2019,
-            ImagePath = "C:\\Users\\antom\\source\\repos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\Fiat 500.png",
-            Quantity = 4,
-            Type = "Особый",
-            Mileage = 15000,
-            FuelType = "Бензин",
-            TransmissionBox = "Механика",
-            Status = "Доступен",
-            DateAdded = DateTime.Now,
-            DateOfLastService = DateTime.Now.AddMonths(-4)
-        }
-    };
-
-            UploadCars(cars);
-*/
            
+         
+
+            
+
         }
 
 
-    
-      
-    
+        private void MessageWindow_Closed()
+        {
+            // После закрытия окна навигируем на страницу входа
+            MainFrame.Navigate(new LoginPage());
+        }
+
+
         private void UpdateBackButtonVisibility()
         {
             ButtonBack.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
@@ -438,7 +214,22 @@ namespace CourseWorkCarsharing
 
         private void OrderButtonClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new OrderPage());
+            Window window = new MessageWindow();
+            if (MainFrame.Content is OrderPage)
+            {
+                window.Closed += (s, args) => MessageWindow_Closed();
+                window.Show();
+         
+            }
+            
+            else
+            {
+                // На другой странице — перейти на OrderPage
+                MainFrame.Navigate(new OrderPage());
+            }
+           
+        
         }
+
     }
 }

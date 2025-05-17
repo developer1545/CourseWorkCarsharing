@@ -25,7 +25,7 @@ namespace CourseWorkCarsharing
         public ParkAutoPage()
         {
             InitializeComponent();
-            var allTypes = CarsharingBDEntities1.GetContext().Autoes.ToList();
+            var allTypes = CarsharingBDEntities.GetContext().Autoes.ToList();
             UpdatePark();
             DataContext = this;
         }
@@ -50,7 +50,7 @@ namespace CourseWorkCarsharing
         */
         private void UpdatePark(int? id = null)
         {
-            var currentPricing = CarsharingBDEntities1.GetContext().Autoes.ToList();
+            var currentPricing = CarsharingBDEntities.GetContext().Autoes.ToList();
 
             // Фильтрация по типу
             var budgetCars = currentPricing.Where(p => p.Type.Trim() == "Бюджет").ToList();
