@@ -49,7 +49,7 @@ namespace CourseWorkCarsharing
                 {
                     var adminWindow = new AdminWindow();
                     adminWindow.Show();
-                    //Application.Current.MainWindow.Close();
+                   // //Application.Current.MainWindow.Close();
                 }
                 else
                 {
