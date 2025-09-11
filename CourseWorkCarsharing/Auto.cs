@@ -11,10 +11,62 @@ namespace CourseWorkCarsharing
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+    using System.Windows.Media.Imaging;
+
     public partial class Auto
     {
-        public int Id_auto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Auto()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+
+            public System.Windows.Media.Imaging.BitmapImage ImageSource
+            {
+                get
+                {
+                    if (Image != null && Image.Length > 0)
+                    {
+                        return ConvertByteArrayToImage(Image);
+                    }
+                    return GetDefaultImage();
+                }
+            }
+
+            private BitmapImage ConvertByteArrayToImage(byte[] imageData)
+            {
+                try
+                {
+                    using (var stream = new MemoryStream(imageData))
+                    {
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.StreamSource = stream;
+                        image.EndInit();
+                        image.Freeze();
+                        return image;
+                    }
+                }
+                catch
+                {
+                    return GetDefaultImage();
+                }
+            }
+
+            private BitmapImage GetDefaultImage()
+            {
+                // Возвращает изображение по умолчанию
+                var defaultImage = new BitmapImage();
+                defaultImage.BeginInit();
+                defaultImage.UriSource = new Uri("D:\\respos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\AutoDefault.png");
+                defaultImage.EndInit();
+                defaultImage.Freeze();
+                return defaultImage;
+            }
+        
+        public int ID { get; set; }
         public string Mark { get; set; }
         public string Model { get; set; }
         public string Colour { get; set; }
@@ -22,12 +74,14 @@ namespace CourseWorkCarsharing
         public byte[] Image { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Type { get; set; }
-        public string Mileage { get; set; }
+        public Nullable<int> Mileage { get; set; }
         public string Fuel_type { get; set; }
         public string Transmission_box { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> Date_added { get; set; }
-        public string Insurance { get; set; }
         public Nullable<System.DateTime> Date_of_last_service { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

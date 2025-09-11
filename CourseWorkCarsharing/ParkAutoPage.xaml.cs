@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,84 +23,122 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class ParkAutoPage : Page
     {
+        private List<Auto> allAutos;
+
         public ParkAutoPage()
         {
             InitializeComponent();
-            var allTypes = CarsharingBDEntities.GetContext().Autoes.ToList();
-            UpdatePark();
-            DataContext = this;
-        }
-        /*private BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-            {
-                return null; // или вернуть изображение по умолчанию
-            }
-
-            using (var stream = new MemoryStream(imageData))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = stream;
-                image.EndInit();
-                image.Freeze(); // Замораживаем объект для использования в других потоках
-                return image;
-            }
-        }
-        */
-        private void UpdatePark(int? id = null)
-        {
-            var currentPricing = CarsharingBDEntities.GetContext().Autoes.ToList();
-
-            // Фильтрация по типу
-            var budgetCars = currentPricing.Where(p => p.Type.Trim() == "Бюджет").ToList();
-            var premiumCars = currentPricing.Where(p => p.Type.Trim() == "Премиум").ToList();
-            var electricCars = currentPricing.Where(p => p.Type.Trim() == "Электро").ToList();
-            var specialCars = currentPricing.Where(p => p.Type.Trim() == "Особый").ToList();
-
-           /* // Преобразование изображений
-            foreach (var car in budgetCars)
-            {
-                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
-            }
-
-            foreach (var car in premiumCars)
-            {
-                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
-            }
-
-            foreach (var car in electricCars)
-            {
-                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
-            }
-
-            foreach (var car in specialCars)
-            {
-                car.ImageSource = ConvertByteArrayToImage(car.ImageData);
-            }
-           */
-            // Установка источника данных
-            ItemsControlRes.ItemsSource = budgetCars.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes1.ItemsSource = premiumCars.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes2.ItemsSource = electricCars.OrderBy(p => p.Quantity).ToList();
-            ItemsControlRes3.ItemsSource = specialCars.OrderBy(p => p.Quantity).ToList();
+            Loaded += ParkAutoPage_Loaded;
         }
 
+            private void CheckAndLoadDefaultImages()
+            {
+                using (var context = new CarsharingBDEntities())
+                {
+                    var carsWithoutImages = context.Autoes.Where(a => a.Image == null).ToList();
 
-        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdatePark();
+                    if (carsWithoutImages.Any())
+                    {
+                        byte[] defaultImage = LoadDefaultImage();
+                        foreach (var car in carsWithoutImages)
+                        {
+                            car.Image = defaultImage;
+                        }
+                        context.SaveChanges();
+                    }
+                }
+            }
+
+            private byte[] LoadDefaultImage()
+            {
+                try
+                {
+                    var uri = new Uri("D:\\respos\\CourseWorkCarsharing\\CourseWorkCarsharing\\mashine\\AutoDefault.png");
+                    var bitmap = new BitmapImage(uri);
+
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                        encoder.Save(stream);
+                        return stream.ToArray();
+                    }
+                }
+                catch
+                {
+                    // Возвращаем пустой массив если изображение не найдено
+                    return new byte[0];
+                }
+            }
+
+            private void ParkAutoPage_Loaded(object sender, RoutedEventArgs e)
+            {
+                LoadAutos();
+            }
+
+            private void LoadAutos()
+            {
+                try
+                {
+                    using (var context = new CarsharingBDEntities())
+                    {
+                        allAutos = context.Autoes
+                            .Where(a => a.Quantity > 0)
+                            .AsNoTracking() // Для только чтения
+                            .ToList();
+
+                        var budgetCars = allAutos
+                            .ToList();
+
+                        ItemsControlRes.ItemsSource = budgetCars;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка загрузки данных: {ex.Message}");
+                }
+            }
+
+            private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                var filter = TBoxSearch.Text.ToLower();
+
+                if (string.IsNullOrWhiteSpace(filter))
+                {
+                    var budgetCars = allAutos
+                        .Where(a => a.Type != null && a.Type.Trim() == "Бюджет")
+                        .ToList();
+                    ItemsControlRes.ItemsSource = budgetCars;
+                }
+                else
+                {
+                    var filteredCars = allAutos
+                        .Where(a => a.Type != null && a.Type.Trim() == "Бюджет" &&
+                                   (a.Mark != null && a.Mark.ToLower().Contains(filter) ||
+                                    a.Model != null && a.Model.ToLower().Contains(filter)))
+                        .ToList();
+
+                    ItemsControlRes.ItemsSource = filteredCars;
+                }
+            }
+
+            private void SelectCarButton_Click(object sender, RoutedEventArgs e)
+            {
+                var button = sender as Button;
+                if (button != null && button.Tag is int carId)
+                {
+                    var selectedCar = allAutos.FirstOrDefault(a => a.ID == carId);
+                    if (selectedCar != null)
+                    {
+                        MessageBox.Show($"Выбран автомобиль: {selectedCar.Mark} {selectedCar.Model}");
+                    }
+                }
+            }
+
+            private void RefreshButton_Click(object sender, RoutedEventArgs e)
+            {
+                LoadAutos();
+                TBoxSearch.Clear();
+            }
         }
-        public class Autoes
-        {
-            // Ваши существующие свойства
-            public byte[] ImageData { get; set; }
-
-            // Новое свойство для привязки изображения
-            [NotMapped] // Не сохранять в БД
-            public BitmapImage ImageSource { get; set; }
-        }
-
     }
-}

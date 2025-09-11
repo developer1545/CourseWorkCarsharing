@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,57 +17,130 @@ using System.Windows.Shapes;
 
 namespace CourseWorkCarsharing
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderPage.xaml
-    /// </summary>
     public partial class OrderPage : Page
     {
+        public string selectedPricingName = "";
+        public string selectedCarInfo = "";
+        public string selectedParkingName = "";
 
-        private string selectedPricingName = "";
-        private string selectedCarInfo = "";
-        private string selectedParkingName = "";
+        private Border _selectedCarBorder = null;
+        private object _selectedPricingItem = null;
+        private Parking _selectedParking = null;
+        private Border _selectedParkingBorder = null;
+
+        private List<Auto> allAutos = new List<Auto>();
+        private List<pricingPlan> allPricingPlans = new List<pricingPlan>();
+        private List<Parking> allParkings = new List<Parking>();
 
         public OrderPage()
         {
             InitializeComponent();
-            UpdatePricing();
-            var allTypes = CarsharingBDEntities.GetContext().Autoes.ToList();
-            UpdatePark();
-            DataContext = this;
-            UpdateParking();
-            UpdateCarOpacity();
-
+            Loaded += OrderPage_Loaded;
         }
-        private void CarBorder_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            _selectedCarBorder = sender as Border;
-            UpdateCarOpacity();
 
-            // Обновляем выбранный авто
-            if (_selectedCarBorder != null)
+        private void OrderPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckAuthentication();
+            LoadData();
+        }
+
+        private void CheckAuthentication()
+        {
+            // Проверяем, авторизован ли пользователь
+            if (!IsUserLoggedIn())
             {
-                var container = FindParent<ContentPresenter>(_selectedCarBorder);
-                if (container != null)
+                ShowLoginPrompt();
+            }
+        }
+
+        private bool IsUserLoggedIn()
+        {
+            return Application.Current.Properties.Contains("IsLoggedIn") &&
+                   Application.Current.Properties["IsLoggedIn"] is bool isLoggedIn &&
+                   isLoggedIn;
+        }
+
+        private void ShowLoginPrompt()
+        {
+            var result = MessageBox.Show("Для оформления заказа необходимо войти в систему. Хотите перейти на страницу входа?",
+                "Требуется авторизация",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Переходим на страницу входа
+                NavigationService?.Navigate(new LoginPage());
+            }
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                using (var context = new CarsharingBDEntities())
                 {
-                    var selectedCar = (Auto)container.DataContext;
-                    selectedCarInfo = $"{selectedCar.Mark} {selectedCar.Model}";
+                    // Загружаем все данные
+                    allAutos = context.Autoes
+                        .AsNoTracking()
+                        .ToList();
+
+                    allPricingPlans = context.pricingPlans
+                        .AsNoTracking()
+                        .ToList();
+
+                    allParkings = context.Parkings
+                        .AsNoTracking()
+                        .ToList();
+
+                    // Обновляем интерфейс
+                    UpdatePricing();
+                    UpdatePark();
+                    UpdateParking();
                     UpdateOrderSummary();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}");
+            }
         }
-        // Для хранения выбранного автомобиля
-        private Border _selectedCarBorder = null;
 
-       
-  
-        private void UpdateOrderSummary()
+        private void UpdatePark()
         {
-            OrderText.Text = selectedPricingName;
-            AutoText.Text = selectedCarInfo;
-            ParkAutoText.Text = selectedParkingName;
-            OrderText1.Text = selectedPricingName;
-            AutoText1.Text = selectedCarInfo;
-            ParkAutoText1.Text = selectedParkingName;
+            ItemsControlRes.ItemsSource = allAutos;
+        }
+
+        private void UpdateParking()
+        {
+            ItemsControlParking.ItemsSource = allParkings;
+        }
+
+        private void UpdatePricing()
+        {
+            ItemsControl.ItemsSource = allPricingPlans.OrderBy(p => p.Cost).ToList();
+        }
+
+        private void CarBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsUserLoggedIn())
+            {
+                ShowLoginPrompt();
+                return;
+            }
+
+            var border = sender as Border;
+            if (border != null)
+            {
+                _selectedCarBorder = border;
+                var selectedCar = border.DataContext as Auto;
+                if (selectedCar != null)
+                {
+                    selectedCarInfo = $"{selectedCar.Mark} {selectedCar.Model}";
+                    UpdateCarOpacity();
+                    UpdateOrderSummary();
+                }
+            }
         }
 
         private void UpdateCarOpacity()
@@ -77,93 +151,36 @@ namespace CourseWorkCarsharing
                 if (container == null) continue;
 
                 var border = FindVisualChild<Border>(container);
-                if (border == null) continue;
-
-                if (border == _selectedCarBorder)
+                if (border != null)
                 {
-                    border.Opacity = 1.0;
-                }
-                else
-                {
-                    border.Opacity = 0.3;
+                    border.Opacity = (border == _selectedCarBorder) ? 1.0 : 0.3;
                 }
             }
         }
 
-
-        private void UpdatePark(int? id = null)
-        {
-            var currentAuto = CarsharingBDEntities.GetContext().Autoes.ToList();
-
-
-            // Установка источника данных
-            ItemsControlRes.ItemsSource = currentAuto.ToList();
-            //ItemsControlRes.ItemsSource = budgetCars.OrderBy(p => p.Quantity).ToList();
-            //ItemsControlRes1.ItemsSource = premiumCars.OrderBy(p => p.Quantity).ToList();
-            //ItemsControlRes2.ItemsSource = electricCars.OrderBy(p => p.Quantity).ToList();
-            //ItemsControlRes3.ItemsSource = specialCars.OrderBy(p => p.Quantity).ToList();
-        }
-        private void UpdateParking()
-        {
-
-            ItemsControlParking.ItemsSource = CarsharingBDEntities.GetContext().Parkings.ToList();
-
-
-        }
-
-        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdatePark();
-        }
-
-
-
-
-        private void UpdatePricing(int? id = null)
-        {
-            var currentPricing = CarsharingBDEntities.GetContext().pricingPlans.ToList();
-            ItemsControl.ItemsSource = currentPricing.OrderBy(p => p.Cost).ToList();
-        }
-
-
-
-        private object _selectedPricingItem; // или конкретный тип, например pricingPlan
-
-
-        // Объявляем поле для хранения выбранного тарифа
-        private Border _selectedBorder = null;
-
-
-
         private void CChooseClickDown(object sender, MouseButtonEventArgs e)
         {
-            Border btn = sender as Border;
-            if (btn == null) return;
+            if (!IsUserLoggedIn())
+            {
+                ShowLoginPrompt();
+                return;
+            }
 
-            var selectedPricing = (pricingPlan)btn.DataContext;
-            _selectedPricingItem = selectedPricing; // сохраняем объект данных
-
-            selectedPricingName = selectedPricing.Pricing_name;
-
-            UpdateOpacity();
-            UpdateOrderSummary();
+            var border = sender as Border;
+            if (border != null)
+            {
+                var selectedPricing = border.DataContext as pricingPlan;
+                if (selectedPricing != null)
+                {
+                    _selectedPricingItem = selectedPricing;
+                    selectedPricingName = selectedPricing.Pricing_name;
+                    UpdatePricingOpacity();
+                    UpdateOrderSummary();
+                }
+            }
         }
 
-        // Метод для поиска родителя нужного типа
-        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null) return null;
-
-            T parent = parentObject as T;
-            if (parent != null)
-                return parent;
-            else
-                return FindParent<T>(parentObject);
-        }
-
-        // Метод обновления прозрачности
-        private void UpdateOpacity()
+        private void UpdatePricingOpacity()
         {
             foreach (var item in ItemsControl.Items)
             {
@@ -171,23 +188,63 @@ namespace CourseWorkCarsharing
                 if (container == null) continue;
 
                 var border = FindVisualChild<Border>(container);
-                if (border == null) continue;
-
-                var dataContext = border.DataContext;
-
-                if (dataContext == _selectedPricingItem)
+                if (border != null)
                 {
-                    border.Opacity = 1.0;
-                }
-                else
-                {
-                    border.Opacity = 0.3;
+                    var dataContext = border.DataContext;
+                    border.Opacity = (dataContext == _selectedPricingItem) ? 1.0 : 0.3;
                 }
             }
         }
 
+        private void ParkingBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsUserLoggedIn())
+            {
+                ShowLoginPrompt();
+                return;
+            }
 
-        // Обобщённый метод поиска VisualChild нужного типа
+            var border = sender as Border;
+            if (border != null)
+            {
+                _selectedParkingBorder = border;
+                _selectedParking = border.DataContext as Parking;
+                if (_selectedParking != null)
+                {
+                    selectedParkingName = _selectedParking.Название;
+                    UpdateParkingOpacity();
+                    UpdateOrderSummary();
+                }
+            }
+        }
+
+        private void UpdateParkingOpacity()
+        {
+            foreach (var item in ItemsControlParking.Items)
+            {
+                var container = ItemsControlParking.ItemContainerGenerator.ContainerFromItem(item) as ContentPresenter;
+                if (container == null) continue;
+
+                var border = FindVisualChild<Border>(container);
+                if (border != null)
+                {
+                    var dataContext = border.DataContext;
+                    border.Opacity = (dataContext == _selectedParking) ? 1.0 : 0.3;
+                }
+            }
+        }
+
+        private void UpdateOrderSummary()
+        {
+            OrderText.Text = selectedPricingName;
+            AutoText.Text = selectedCarInfo;
+            ParkAutoText.Text = selectedParkingName;
+            OrderText1.Text = selectedPricingName;
+            AutoText1.Text = selectedCarInfo;
+            ParkAutoText1.Text = selectedParkingName;
+        }
+
+        // Вспомогательные методы для поиска элементов
         public static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
@@ -202,97 +259,117 @@ namespace CourseWorkCarsharing
             return null;
         }
 
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var filter = TBoxSearch.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                ItemsControlRes.ItemsSource = allAutos;
+            }
+            else
+            {
+                var filteredCars = allAutos
+                    .Where(a => (a.Mark != null && a.Mark.ToLower().Contains(filter)) ||
+                               (a.Model != null && a.Model.ToLower().Contains(filter)))
+                    .ToList();
+                ItemsControlRes.ItemsSource = filteredCars;
+            }
+        }
+
         private void TBox__Search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdatePricing();
-        }
-
-        private void HighlightPointByTag(string targetTag)
-        {
-            // Снимаем подсветку со всех точек
-            foreach (var child in MapCanvas.Children)
+            var filter = TBoxSearchT.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(filter))
             {
-                if (child is Ellipse ellipse)
-                {
-                    ellipse.Fill = Brushes.LightGray;
-                    ellipse.StrokeThickness = 1;
-                }
+                ItemsControl.ItemsSource = allPricingPlans.OrderBy(p => p.Cost);
             }
-
-            // Находим точку по Tag
-            foreach (var child in MapCanvas.Children)
+            else
             {
-                if (child is Ellipse ellipse && ellipse.Tag.ToString() == targetTag)
-                {
-                    // Подсвечиваем выбранную точку
-                    ellipse.Fill = Brushes.Blue;
-                    ellipse.StrokeThickness = 2;
-                }
+                var filteredPricing = allPricingPlans
+                    .Where(p => p.Pricing_name != null && p.Pricing_name.ToLower().Contains(filter))
+                    .OrderBy(p => p.Cost)
+                    .ToList();
+                ItemsControl.ItemsSource = filteredPricing;
             }
         }
 
-        // В коде за кулисами
-        // Задайте относительные координаты для каждой точки
-        private double point1RelX = 0.51; // 40% ширины изображения
-        private double point1RelY = 0.42; // 50% высоты изображения
-
-        private double point2RelX = 0.22;
-        private double point2RelY = 0.26;
-
-        private double point3RelX = 0.2;
-        private double point3RelY = 0.4;
-
-        private double point4RelX = 0.47;
-        private double point4RelY = 0.60;
-
-        private double point5RelX = 0.39;
-        private double point5RelY = 0.67;
-        // В обработчике SizeChanged
-        private void MapImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void ButtonPlaceOrder_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePointsPosition();
-        }
-
-        private void UpdatePointsPosition()
-        {
-
-            double width = MapImage.ActualWidth;
-            double height = MapImage.ActualHeight;
-
-            Canvas.SetLeft(Point1, point1RelX * width);
-            Canvas.SetTop(Point1, point1RelY * height);
-
-            Canvas.SetLeft(Point2, point2RelX * width);
-            Canvas.SetTop(Point2, point2RelY * height);
-
-            Canvas.SetLeft(Point3, point3RelX * width);
-            Canvas.SetTop(Point3, point3RelY * height);
-
-            Canvas.SetLeft(Point4, point4RelX * width);
-            Canvas.SetTop(Point4, point4RelY * height);
-
-            Canvas.SetLeft(Point5, point5RelX * width);
-            Canvas.SetTop(Point5, point5RelY * height);
-        }
-
-
-        private void MapBorder_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var border = sender as Border;
-            if (border != null && border.Tag != null)
+            if (!IsUserLoggedIn())
             {
-                string targetTag = border.Tag.ToString();
-                HighlightPointByTag(targetTag);
-                var parking = border.DataContext as Parking;
-                if (parking != null)
+                ShowLoginPrompt();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedCarInfo) || string.IsNullOrEmpty(selectedPricingName) || string.IsNullOrEmpty(selectedParkingName))
+            {
+                MessageBox.Show("Пожалуйста, выберите автомобиль, тариф и парковку.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                using (var context = new CarsharingBDEntities())
                 {
-                    selectedParkingName = $"{parking.Название} - {parking.Расположение} ";
-                    UpdateOrderSummary();
+                    string userName = Application.Current.Properties["User Name"] as string;
+                    var user = context.Users.FirstOrDefault(u => u.Name == userName);
+                    if (user == null)
+                    {
+                        MessageBox.Show("Пользователь не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // Получаем выбранные объекты
+                    var car = allAutos.FirstOrDefault(a => (a.Mark + " " + a.Model) == selectedCarInfo);
+                    var pricing = allPricingPlans.FirstOrDefault(p => p.Pricing_name == selectedPricingName);
+
+                    if (car == null || pricing == null || _selectedParking == null)
+                    {
+                        MessageBox.Show("Ошибка при выборе данных для заказа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    var order = new Order
+                    {
+                        UserID = user.UserID,
+                        AutoID = car.ID,
+                        PricingPlanID = pricing.ID,
+                        ParkingID = _selectedParking.ID_Парковки,
+                        OrderDate = DateTime.Now,
+                    };
+
+                    context.Orders.Add(order);
+
+                    // Уменьшаем количество доступных автомобилей
+                    var carInDb = context.Autoes.Find(car.ID);
+                    if (carInDb != null)
+                    {
+                        carInDb.Quantity--;
+                        if (carInDb.Quantity <= 0)
+                        {
+                            carInDb.Status = "Не доступен";
+                        }
+                    }
+
+                    context.SaveChanges();
+
+                    MessageBox.Show("Заказ успешно оформлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Обновляем данные
+                    LoadData();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-     
+        // Метод для обновления состояния при возвращении на страницу
+        public void RefreshPage()
+        {
+            CheckAuthentication();
+            LoadData();
+        }
     }
 }
-

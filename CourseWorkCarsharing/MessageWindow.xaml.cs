@@ -19,19 +19,33 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class MessageWindow : Window
     {
-        private bool isRegistered = false;
+        private bool isLogin = false;
         private string NameAccount = "";
-        
-        public MessageWindow()
+        private string selectedPricingName = "";
+        private string selectedCarInfo = "";
+        private string selectedParkingName = "";
+
+        public MessageWindow(string selectedPricingName, string selectedCarInfo, string selectedParkingName, bool isLogin = false, string nameAccount = "")
         {
             InitializeComponent();
             TextWriten();
-           
+            this.selectedPricingName = selectedPricingName;
+            this.selectedCarInfo = selectedCarInfo;
+            this.selectedParkingName = selectedParkingName;
+            this.isLogin = isLogin;
+            this.NameAccount = nameAccount;
+            UpdateOrderSummary();
         }
-        private  void TextWriten()
+        private void UpdateOrderSummary()
+        {
+            OrderText.Text = selectedPricingName;
+            AutoText.Text = selectedCarInfo;
+            ParkAutoText.Text = selectedParkingName;
+        }
+            private  void TextWriten()
         {
            
-            if (isRegistered == false)
+            if (isLogin == false)
             {
                 WindowText.Text = "Вы не вошли в аккаунт";
                 WindowButton.Content = "Войти";
@@ -44,6 +58,11 @@ namespace CourseWorkCarsharing
             // Здесь запускаем новое окно после закрытия текущего
             var nextWindow = new MainWindow(); // или любое другое окно
             
+        }
+
+        private void ButtonClickOrderM(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

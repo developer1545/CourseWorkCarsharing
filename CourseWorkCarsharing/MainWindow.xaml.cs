@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace CourseWorkCarsharing
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public class Car
+    public partial class Car
     {
         public string Mark { get; set; }
         public string Model { get; set; }
@@ -166,13 +167,16 @@ namespace CourseWorkCarsharing
         {
             MainFrame.Navigate(new BusinessPage());
         }
-
+        private void ButtonAccountEnterClikc(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new LoginPage());
+        }
         private void ParkButtonClick(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new ParkAutoPage());
         }
         //Загрузка изображений в БД
-        
+
         public static void UploadCars(List<Car> cars)
         {
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CarsharingBD;Integrated Security=True;";
@@ -199,7 +203,7 @@ namespace CourseWorkCarsharing
                         command.Parameters.AddWithValue("@TransmissionBox", car.TransmissionBox);
                         command.Parameters.AddWithValue("@Status", car.Status);
                         command.Parameters.AddWithValue("@DateAdded", car.DateAdded);
-                        command.Parameters.AddWithValue("@Date_Of_Last_Service", car.DateOfLastService);
+                        command.Parameters.AddWithValue("@Date_of_last_service", car.DateOfLastService);
 
                         command.ExecuteNonQuery();
                     }
@@ -207,19 +211,26 @@ namespace CourseWorkCarsharing
             }
         }
 
-        private void ButtonAccountEnterClikc(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new LoginPage());
-        }
 
         private void OrderButtonClick(object sender, RoutedEventArgs e)
         {
-            Window window = new MessageWindow();
-            if (MainFrame.Content is OrderPage)
+           
+
+            
+            if (MainFrame.Content is OrderPage orderPage)
             {
-                window.Closed += (s, args) => MessageWindow_Closed();
-                window.Show();
-         
+                // Получите значения из OrderPage
+                string pricingName = orderPage.selectedPricingName;
+                string carInfo = orderPage.selectedCarInfo;
+                string parkingName = orderPage.selectedParkingName;
+              
+                bool isLogin = false;/* сюда добавьте логику проверки регистрации, если есть */
+                string nameAccount = ""; /* сюда добавьте имя аккаунта, если есть */
+
+                var messageWindow = new MessageWindow(pricingName, carInfo, parkingName, isLogin, nameAccount);
+                messageWindow.Closed += (s, args) => MessageWindow_Closed();
+                messageWindow.Show();
+
             }
             
             else

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Policy;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -24,227 +27,171 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class RegisterPage : Page
     {
-        public RegisterPage()
-        {
-            InitializeComponent();
-            LoadComboBoxes();
+    
+            private string _password = string.Empty;
+            private bool _isUpdatingPasswordFromBox = false;
 
-        }
-        private void LoadComboBoxes()
-        {
-            // Заполнение ComboBox для дат
-            LoadDateComboBoxes(DayComboBox, MonthComboBox, YearComboBox, 1925);
-            LoadDateComboBoxes(DayComboBox2, MonthComboBox2, YearComboBox2, 1970);
-            LoadDateComboBoxes(DayComboBox3, MonthComboBox3, YearComboBox3, 1970);
-            LoadDateComboBoxes(DayComboBox4, MonthComboBox4, YearComboBox4, 1970);
-            LoadDateComboBoxes(DayComboBox5, MonthComboBox5, YearComboBox5, 1970);
-            LoadDateComboBoxes1(DayComboBox6, MonthComboBox6, YearComboBox6, 2070);
-        }
-
-        private void LoadDateComboBoxes(ComboBox dayComboBox, ComboBox monthComboBox, ComboBox yearComboBox, int yearStart)
-        {
-            // Заполнение ComboBox для дней
-            for (int i = 1; i <= 31; i++)
+            public RegisterPage()
             {
-                dayComboBox.Items.Add(i);
+                InitializeComponent();
+
+                PasswordBox.PasswordChanged += PasswordBox_PasswordChanged;
+                textBox.TextChanged += TextBox_TextChanged;
             }
 
-            // Заполнение ComboBox для месяцев
-            monthComboBox.ItemsSource = new List<string>
-    {
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-    };
-
-            // Заполнение ComboBox для годов (например, от 1900 до текущего года)
-            int currentYear = DateTime.Now.Year;
-            for (int i = yearStart; i <= currentYear; i++)
+            private void ButtonRegisterClick(object sender, RoutedEventArgs e)
             {
-                yearComboBox.Items.Add(i);
-            }
-        }
-        private void LoadDateComboBoxes1(ComboBox dayComboBox, ComboBox monthComboBox, ComboBox yearComboBox, int yearStart)
-        {
-            // Заполнение ComboBox для дней
-            for (int i = 1; i <= 31; i++)
-            {
-                dayComboBox.Items.Add(i);
-            }
+                StringBuilder errors = new StringBuilder();
 
-            // Заполнение ComboBox для месяцев
-            monthComboBox.ItemsSource = new List<string>
-    {
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-    };
+                string login = LoginBox.Text.Trim();
+                string password = showPasswordCheckBox.IsChecked == true ? textBox.Text : PasswordBox.Password;
+                string phone = NumberPhoneBox.Text.Trim();
+                string email = MailAdressBox.Text.Trim();
+                string firstName = NameBox.Text.Trim();
+                string lastName = FamilyBox.Text.Trim();
+                DateTime? birthday = DatePickerBurd.SelectedDate;
 
-            // Заполнение ComboBox для годов (например, от 1900 до текущего года)
-            int currentYear = DateTime.Now.Year;
-            for (int i = currentYear; i <= yearStart; i++)
-            {
-                yearComboBox.Items.Add(i);
-            }
-        }
+                // Валидация
+                if (string.IsNullOrWhiteSpace(login))
+                    errors.AppendLine("Укажите логин.");
 
-        private void NumberPhone()
-        {
-            // Проверяем, есть ли текст в Box
-            if (!string.IsNullOrWhiteSpace(NumberPhoneBox.Text))
-            {
-                // Получаем номер телефона из Box
-                string phoneNumber = NumberPhoneBox.Text;
+                if (string.IsNullOrWhiteSpace(password))
+                    errors.AppendLine("Укажите пароль.");
 
-                // Проверяем формат номера телефона
-                if (IsValidPhoneNumber(phoneNumber))
-                {
-                    // Если номер корректен, форматируем его
-                    string formattedNumber = FormatPhoneNumber(phoneNumber);
-                    NumPhoHint.Text = "";
-                }
+                if (password.Length > 50)
+                    errors.AppendLine("Длина пароля не должна превышать 50 символов.");
+
+                if (string.IsNullOrWhiteSpace(phone))
+                    errors.AppendLine("Укажите номер телефона.");
+
+                if (!IsValidPhoneNumber(phone))
+                    errors.AppendLine("Неверный формат номера телефона. Введите 11 цифр, например: 79991234567.");
+
+                if (string.IsNullOrWhiteSpace(email))
+                    errors.AppendLine("Укажите адрес электронной почты.");
+
+                if (!IsValidEmail(email))
+                    errors.AppendLine("Неверный формат электронной почты.");
+
+                if (string.IsNullOrWhiteSpace(firstName))
+                    errors.AppendLine("Укажите имя.");
+
+                if (string.IsNullOrWhiteSpace(lastName))
+                    errors.AppendLine("Укажите фамилию.");
+
+                if (!birthday.HasValue)
+                    errors.AppendLine("Укажите дату рождения.");
                 else
                 {
-                    NumPhoHint.Text = "Неверный формат номера телефона. Пожалуйста, введите номер в формате: 7XXX-XXX-XXXX";
+                    if (birthday.Value > DateTime.Today)
+                        errors.AppendLine("Дата рождения не может быть в будущем.");
+
+                    if (birthday.Value > DateTime.Today.AddYears(-16))
+                        errors.AppendLine("Пользователь должен быть не младше 16 лет.");
                 }
-            }
-        }
 
-        // Метод для проверки правильности формата номера телефона
-        private bool IsValidPhoneNumber(string phone)
-        {
-            // Проверяем, что номер состоит только из цифр и имеет длину 10 цифр
-            return Regex.IsMatch(phone, @"^\d{11}$");
-        }
+                // Проверка уникальности логина и email
+                if (CarsharingBDEntities.GetContext().Users.Any(u => u.Login == login))
+                    errors.AppendLine("Пользователь с таким логином уже существует.");
 
-        public static string FormatPhoneNumber(string phone)
-        {
+                if (CarsharingBDEntities.GetContext().Users.Any(u => u.Email == email))
+                    errors.AppendLine("Пользователь с таким email уже существует.");
 
-
-            Regex regex = new Regex(@"[^\d]");
-            phone = regex.Replace(phone, "");
-            phone = Regex.Replace(phone, @"(\d{1})(\d{3})(\d{3})(\d{4})", "$1-$2-$3-$4");
-            return phone;
-
-        }
-        private void NumberPhoneBoxChanged(object sender, TextChangedEventArgs e)
-        {
-            NumberPhone();
-        }
-
-        private void MailAdressChanged(object sender, TextChangedEventArgs e)
-        {
-            MailAddress();
-        }
-
-        private void MailAddress()
-        {
-            if (!string.IsNullOrWhiteSpace(MailAdressBox.Text))
-            {
-                string email = MailAdressBox.Text;
-
-                // Проверяем формат адреса электронной почты
-                if (IsValidEmail(email))
+                if (errors.Length > 0)
                 {
-                    MailAdrHint.Text = ""; // Очистка сообщения об ошибке
+                    MessageBox.Show(errors.ToString(), "Ошибка регистрации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-                else
+
+                try
                 {
-                    MailAdrHint.Text = "Неверный формат адреса электронной почты. Пожалуйста, введите адрес в формате: example@domain.com";
+                    var newUser = new User
+                    {
+                        Login = login,
+                        Password = password,
+                        Phone = phone,
+                        Email = email,
+                        Name = firstName + " " + lastName,
+                        Birthday = birthday.Value,
+                        CreatedAt = DateTime.Now,
+                        Role = "User  "
+                    };
+
+                    CarsharingBDEntities.GetContext().Users.Add(newUser);
+                    CarsharingBDEntities.GetContext().SaveChanges();
+
+                    MessageBox.Show("Регистрация прошла успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Переход на страницу входа
+                    this.NavigationService.Navigate(new LoginPage());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
 
-        // Метод для проверки правильности формата адреса электронной почты
-        private bool IsValidEmail(string email)
-        {
-            try
+            private bool IsValidPhoneNumber(string phone)
             {
-                var addr = new MailAddress(email);
-                return addr.Address == email; // Проверяем, совпадает ли адрес с исходным
+                // Проверяем, что номер состоит из 11 цифр (например, 7XXXXXXXXXX)
+                return Regex.IsMatch(phone, @"^\d{11}$");
             }
-            catch
-            {
-                return false; // Если возникло исключение, значит формат неверный
-            }
-        }
 
-        private void LoginTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (LoginBox.Text.Length >= 31)
+            private bool IsValidEmail(string email)
             {
-                LoginBoxHint.Text = "Длина логина не должна привышать 30 символов";
+                try
+                {
+                    var addr = new MailAddress(email);
+                    return addr.Address == email;
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            else
-            {
-                LoginBoxHint.Text = "";
-            }
-        }
 
-        private void SeriaChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SerialPasswordPaBox.Text.Length >= 5)
+            private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
             {
-                SerialPHint.Text = "Длина символов превышает стандартную";
-            }
-            else
-            {
-                SerialPHint.Text = "";
-            }
-        }
+                if (_isUpdatingPasswordFromBox)
+                    return;
 
-        private void NumberChanged(object sender, TextChangedEventArgs e)
-        {
-            if (NumberPasswordBox.Text.Length >= 7)
-            {
-                NumberPHint.Text = "Длина символов превышает стандартную";
+                _password = PasswordBox.Password;
+                _isUpdatingPasswordFromBox = true;
+                if (showPasswordCheckBox.IsChecked == true)
+                {
+                    textBox.Text = _password;
+                }
+                _isUpdatingPasswordFromBox = false;
             }
-            else
-            {
-                NumberPHint.Text = "";
-            }
-        }
 
-        private void SeriaAuChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SerialAutoPaBox.Text.Length >= 5)
+            private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
             {
-                SerialAutoHint.Text = "Длина символов превышает стандартную";
-            }
-            else
-            {
-                SerialAutoHint.Text = "";
-            }
-        }
+                if (_isUpdatingPasswordFromBox)
+                    return;
 
-        private void NumberAuChanged(object sender, TextChangedEventArgs e)
-        {
-            if (NumberAutoPaBox.Text.Length >= 7)
-            {
-                NumberAutoHint.Text = "Длина символов превышает стандартную";
+                _password = textBox.Text;
+                _isUpdatingPasswordFromBox = true;
+                if (showPasswordCheckBox.IsChecked != true)
+                {
+                    PasswordBox.Password = _password;
+                }
+                _isUpdatingPasswordFromBox = false;
             }
-            else
+
+            private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
             {
-                NumberAutoHint.Text = "";
+                textBox.Visibility = Visibility.Visible;
+                PasswordBox.Visibility = Visibility.Collapsed;
+                textBox.Text = _password;
+                showPasswordCheckBox.Content = "Скрыть пароль 🔓";
+            }
+
+            private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
+            {
+                textBox.Visibility = Visibility.Collapsed;
+                PasswordBox.Visibility = Visibility.Visible;
+                PasswordBox.Password = _password;
+                showPasswordCheckBox.Content = "Показать пароль 🔒";
             }
         }
-
-        private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            textBox.Visibility = Visibility.Visible;
-            textBox.Text = PasswordBox.Password;
-            PasswordBox.Visibility = Visibility.Collapsed;
-            showPasswordCheckBox.Content = "Скрыть пароль 🔓";
-        }
-        private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            PasswordBox.Visibility = Visibility.Visible;
-            PasswordBox.Password = textBox.Text;
-            textBox.Visibility = Visibility.Collapsed;
-            showPasswordCheckBox.Content = "Показать пароль 🔒";
-        }
-
     }
-}
-
-
-
-

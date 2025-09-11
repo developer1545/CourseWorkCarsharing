@@ -17,16 +17,23 @@ namespace CourseWorkCarsharing
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Orders = new HashSet<Order>();
             this.UserDatas = new HashSet<UserData>();
         }
     
         public int UserID { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
         public string Username { get; set; }
-        public string Email { get; set; }
         public string Phone { get; set; }
+        public string Email { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string Role { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserData> UserDatas { get; set; }
     }

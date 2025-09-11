@@ -14,14 +14,20 @@ namespace CourseWorkCarsharing
     
     public partial class UserData
     {
-        public Nullable<int> UserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Patronymic { get; set; }
-        public int PassportNumber { get; set; }
+        public int UserDataID { get; set; }
+        public int UserID { get; set; }
+        public string PassportSerial { get; set; }
+        public string PassportNumber { get; set; }
         public string PassportIssuedBy { get; set; }
-        public System.DateTime PassportIssueDate { get; set; }
         public Nullable<System.DateTime> PassportExpirationDate { get; set; }
+        public string Pasport_Unit_code { get; set; }
+        public string Drive_license_serial { get; set; }
+        public string Drive_license_number { get; set; }
+        public Nullable<System.DateTime> Drive_license_date { get; set; }
+        public Nullable<System.DateTime> End_drive_license_date { get; set; }
+        public string Drive_Unit_code { get; set; }
+        public string Experience { get; set; }
+        public string Drive_license_Category { get; set; }
     
         public virtual User User { get; set; }
     }

@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CarsharingBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year_of_release" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mileage" Type="int" />
+          <Property Name="Fuel_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Transmission_box" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_added" Type="datetime" />
+          <Property Name="Date_of_last_service" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="AutoID" Type="int" />
+          <Property Name="PricingPlanID" Type="int" />
+          <Property Name="ParkingID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Parkings">
+          <Key>
+            <PropertyRef Name="ID_Парковки" />
+          </Key>
+          <Property Name="ID_Парковки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Расположение" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pricingPlans">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pricing_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Term" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserDatas">
+          <Key>
+            <PropertyRef Name="UserDataID" />
+          </Key>
+          <Property Name="UserDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PassportSerial" Type="nvarchar" MaxLength="10" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="PassportIssuedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="PassportExpirationDate" Type="date" />
+          <Property Name="Pasport_Unit_code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Drive_license_serial" Type="nvarchar" MaxLength="10" />
+          <Property Name="Drive_license_number" Type="nvarchar" MaxLength="10" />
+          <Property Name="Drive_license_date" Type="date" />
+          <Property Name="End_drive_license_date" Type="date" />
+          <Property Name="Drive_Unit_code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Experience" Type="nvarchar" MaxLength="50" />
+          <Property Name="Drive_license_Category" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Orders__AutoID__1CF15040">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="AutoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ParkingI__1ED998B2">
+          <End Role="Parkings" Type="Self.Parkings" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parkings">
+              <PropertyRef Name="ID_Парковки" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ParkingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PricingP__1DE57479">
+          <End Role="pricingPlans" Type="Self.pricingPlans" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pricingPlans">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PricingPlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserID__1BFD2C07">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserDatas__UserI__1920BF5C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserDatas" Type="Self.UserDatas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDatas">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CarsharingBDModelContainer">
+          <EntitySet Name="Auto" EntityType="Self.Auto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parkings" EntityType="Self.Parkings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pricingPlans" EntityType="Self.pricingPlans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDatas" EntityType="Self.UserDatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Orders__AutoID__1CF15040" Association="Self.FK__Orders__AutoID__1CF15040">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ParkingI__1ED998B2" Association="Self.FK__Orders__ParkingI__1ED998B2">
+            <End Role="Parkings" EntitySet="Parkings" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PricingP__1DE57479" Association="Self.FK__Orders__PricingP__1DE57479">
+            <End Role="pricingPlans" EntitySet="pricingPlans" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserID__1BFD2C07" Association="Self.FK__Orders__UserID__1BFD2C07">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserDatas__UserI__1920BF5C" Association="Self.FK__UserDatas__UserI__1920BF5C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDatas" EntitySet="UserDatas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarsharingBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year_of_release" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mileage" Type="Int32" />
+          <Property Name="Fuel_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Transmission_box" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_added" Type="DateTime" Precision="3" />
+          <Property Name="Date_of_last_service" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AutoID__1CF15040" FromRole="Auto" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="AutoID" Type="Int32" />
+          <Property Name="PricingPlanID" Type="Int32" />
+          <Property Name="ParkingID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Auto" Relationship="Self.FK__Orders__AutoID__1CF15040" FromRole="Orders" ToRole="Auto" />
+          <NavigationProperty Name="Parking" Relationship="Self.FK__Orders__ParkingI__1ED998B2" FromRole="Orders" ToRole="Parkings" />
+          <NavigationProperty Name="pricingPlan" Relationship="Self.FK__Orders__PricingP__1DE57479" FromRole="Orders" ToRole="pricingPlans" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Orders__UserID__1BFD2C07" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Parking">
+          <Key>
+            <PropertyRef Name="ID_Парковки" />
+          </Key>
+          <Property Name="ID_Парковки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Расположение" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ParkingI__1ED998B2" FromRole="Parkings" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="pricingPlan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pricing_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Term" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PricingP__1DE57479" FromRole="pricingPlans" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="UserDataID" />
+          </Key>
+          <Property Name="UserDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PassportSerial" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PassportIssuedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PassportExpirationDate" Type="DateTime" Precision="0" />
+          <Property Name="Pasport_Unit_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Drive_license_serial" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Drive_license_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Drive_license_date" Type="DateTime" Precision="0" />
+          <Property Name="End_drive_license_date" Type="DateTime" Precision="0" />
+          <Property Name="Drive_Unit_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Drive_license_Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserDatas__UserI__1920BF5C" FromRole="UserDatas" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__UserID__1BFD2C07" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="UserDatas" Relationship="Self.FK__UserDatas__UserI__1920BF5C" FromRole="Users" ToRole="UserDatas" />
+        </EntityType>
+        <Association Name="FK__Orders__AutoID__1CF15040">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="AutoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ParkingI__1ED998B2">
+          <End Role="Parkings" Type="Self.Parking" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parkings">
+              <PropertyRef Name="ID_Парковки" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ParkingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PricingP__1DE57479">
+          <End Role="pricingPlans" Type="Self.pricingPlan" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pricingPlans">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PricingPlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserID__1BFD2C07">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserDatas__UserI__1920BF5C">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserDatas" Type="Self.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDatas">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarsharingBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autoes" EntityType="Self.Auto" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Parkings" EntityType="Self.Parking" />
+          <EntitySet Name="pricingPlans" EntityType="Self.pricingPlan" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="UserDatas" EntityType="Self.UserData" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Orders__AutoID__1CF15040" Association="Self.FK__Orders__AutoID__1CF15040">
+            <End Role="Auto" EntitySet="Autoes" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ParkingI__1ED998B2" Association="Self.FK__Orders__ParkingI__1ED998B2">
+            <End Role="Parkings" EntitySet="Parkings" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PricingP__1DE57479" Association="Self.FK__Orders__PricingP__1DE57479">
+            <End Role="pricingPlans" EntitySet="pricingPlans" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserID__1BFD2C07" Association="Self.FK__Orders__UserID__1BFD2C07">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserDatas__UserI__1920BF5C" Association="Self.FK__UserDatas__UserI__1920BF5C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDatas" EntitySet="UserDatas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CarsharingBDModelContainer" CdmEntityContainer="CarsharingBDEntities">
+          <EntitySetMapping Name="Autoes">
+            <EntityTypeMapping TypeName="CarsharingBDModel.Auto">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="Year_of_release" ColumnName="Year_of_release" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Fuel_type" ColumnName="Fuel_type" />
+                <ScalarProperty Name="Transmission_box" ColumnName="Transmission_box" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_added" ColumnName="Date_added" />
+                <ScalarProperty Name="Date_of_last_service" ColumnName="Date_of_last_service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CarsharingBDModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AutoID" ColumnName="AutoID" />
+                <ScalarProperty Name="PricingPlanID" ColumnName="PricingPlanID" />
+                <ScalarProperty Name="ParkingID" ColumnName="ParkingID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parkings">
+            <EntityTypeMapping TypeName="CarsharingBDModel.Parking">
+              <MappingFragment StoreEntitySet="Parkings">
+                <ScalarProperty Name="ID_Парковки" ColumnName="ID_Парковки" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Расположение" ColumnName="Расположение" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pricingPlans">
+            <EntityTypeMapping TypeName="CarsharingBDModel.pricingPlan">
+              <MappingFragment StoreEntitySet="pricingPlans">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Pricing_name" ColumnName="Pricing_name" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CarsharingBDModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDatas">
+            <EntityTypeMapping TypeName="CarsharingBDModel.UserData">
+              <MappingFragment StoreEntitySet="UserDatas">
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PassportSerial" ColumnName="PassportSerial" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportIssuedBy" ColumnName="PassportIssuedBy" />
+                <ScalarProperty Name="PassportExpirationDate" ColumnName="PassportExpirationDate" />
+                <ScalarProperty Name="Pasport_Unit_code" ColumnName="Pasport_Unit_code" />
+                <ScalarProperty Name="Drive_license_serial" ColumnName="Drive_license_serial" />
+                <ScalarProperty Name="Drive_license_number" ColumnName="Drive_license_number" />
+                <ScalarProperty Name="Drive_license_date" ColumnName="Drive_license_date" />
+                <ScalarProperty Name="End_drive_license_date" ColumnName="End_drive_license_date" />
+                <ScalarProperty Name="Drive_Unit_code" ColumnName="Drive_Unit_code" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Drive_license_Category" ColumnName="Drive_license_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CarsharingBDModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

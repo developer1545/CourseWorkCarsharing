@@ -64,26 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Auto.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
     <Compile Include="BusinessPage.xaml.cs">
       <DependentUpon>BusinessPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CarsheringModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarsheringModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarsheringModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarsheringModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarsheringModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
@@ -98,6 +86,24 @@
     <Compile Include="MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelCarsharing.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCarsharing.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCarsharing.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCarsharing.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCarsharing.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
@@ -105,10 +111,10 @@
       <DependentUpon>ParkAutoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parking.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
     <Compile Include="pricingPlan.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
     <Compile Include="pricingPlansPage.xaml.cs">
       <DependentUpon>pricingPlansPage.xaml</DependentUpon>
@@ -119,21 +125,19 @@
     <Compile Include="RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
     <Compile Include="UserData.cs">
-      <DependentUpon>CarsheringModel.tt</DependentUpon>
+      <DependentUpon>ModelCarsharing.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BusinessPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,12 +209,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="CarsheringModel.edmx">
+    <EntityDeploy Include="ModelCarsharing.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarsheringModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelCarsharing.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CarsheringModel.edmx.diagram">
-      <DependentUpon>CarsheringModel.edmx</DependentUpon>
+    <None Include="ModelCarsharing.edmx.diagram">
+      <DependentUpon>ModelCarsharing.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -296,18 +300,21 @@
     <Resource Include="mashine\Wolswagen Golf.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CarsheringModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarsheringModel.edmx</DependentUpon>
-      <LastGenOutput>CarsheringModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="CarsheringModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarsheringModel.edmx</DependentUpon>
-      <LastGenOutput>CarsheringModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="ImageOrder\i1.png" />
     <Resource Include="ImageOrder\i.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mashine\AutoDefault.png" />
+    <Content Include="ModelCarsharing.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCarsharing.edmx</DependentUpon>
+      <LastGenOutput>ModelCarsharing.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelCarsharing.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCarsharing.edmx</DependentUpon>
+      <LastGenOutput>ModelCarsharing.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

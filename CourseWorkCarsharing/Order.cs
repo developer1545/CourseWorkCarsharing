@@ -10,10 +10,20 @@
 namespace CourseWorkCarsharing
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Order
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int OrderID { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<int> AutoID { get; set; }
+        public Nullable<int> PricingPlanID { get; set; }
+        public Nullable<int> ParkingID { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+    
+        public virtual Auto Auto { get; set; }
+        public virtual Parking Parking { get; set; }
+        public virtual pricingPlan pricingPlan { get; set; }
+        public virtual User User { get; set; }
     }
 }

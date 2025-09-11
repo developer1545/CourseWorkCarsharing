@@ -20,54 +20,52 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class pricingPlansPage : Page
     {
-        public pricingPlansPage()
-        {
-            InitializeComponent();
-            var allTypes = CarsharingBDEntities.GetContext().pricingPlans.ToList();
-            UpdatePricing();
-          
-            DataContext = this;
-        }
-        private void UpdatePricing(int? id = null)
-        {
-            var currentPricing = CarsharingBDEntities.GetContext().pricingPlans.ToList();
-            var currentPricing1 = CarsharingBDEntities.GetContext().pricingPlans.ToList();
-            var currentPricing2 = CarsharingBDEntities.GetContext().pricingPlans.ToList();
+            private List<pricingPlan> allPricingPlans;
 
-
-            // Фильтрация по Id, если он предоставлен
-
-            //var typeById = currentTours.FirstOrDefault(p => p.Type == "Бюджет    ");
-            /*if (typeById != null)
+            public pricingPlansPage()
             {
-                currentTours = new List<pricingPlan> { typeById }; // Создаем новый список с одним элементом
-            }
-            else
-            {
-                currentTours = new List<pricingPlan>(); // Если по Id ничего не найдено, возвращаем пустой список
+                InitializeComponent();
+                Loaded += PricingPlansPage_Loaded;
+                DataContext = this;
             }
 
-      */
-            currentPricing = currentPricing.Where(p => p.Type.Trim() == "Бюджет").ToList();
-            currentPricing1 = currentPricing1.Where(p => p.Type.Trim() == "Премиум").ToList();
-            currentPricing2 = currentPricing2.Where(p => p.Type.Trim() == "Электро").ToList();
+            private void PricingPlansPage_Loaded(object sender, RoutedEventArgs e)
+            {
+                UpdatePricing();
+            }
 
-            // Установка источника данных
-            ItemsControlRes.ItemsSource = currentPricing.OrderBy(p => p.Cost).ToList();
-            ItemsControlRes1.ItemsSource = currentPricing1.OrderBy(p => p.Cost).ToList();
-            ItemsControlRes2.ItemsSource = currentPricing2.OrderBy(p => p.Cost).ToList();
+            private void UpdatePricing(int? id = null)
+            {
+                try
+                {
+                    using (var context = new CarsharingBDEntities())
+                    {
+                        allPricingPlans = context.pricingPlans
+                            .AsNoTracking() // Для только чтения
+                            .ToList();
 
+                        var currentPricing = allPricingPlans.ToList();
+                        var currentPricing1 = allPricingPlans
+                            .Where(p => p.Type != null && p.Type.Trim() == "Премиум")
+                            .ToList();
+                        var currentPricing2 = allPricingPlans
+                            .Where(p => p.Type != null && p.Type.Trim() == "Электро")
+                            .ToList();
 
+                        ItemsControlRes.ItemsSource = currentPricing.OrderBy(p => p.Cost).ToList();
+                        // ItemsControlRes1.ItemsSource = currentPricing1.OrderBy(p => p.Cost).ToList();
+                        // ItemsControlRes2.ItemsSource = currentPricing2.OrderBy(p => p.Cost).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка загрузки тарифов: {ex.Message}");
+                }
+            }
 
+            private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                UpdatePricing();
+            }
         }
-
-
-        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdatePricing();
-        }
-
-
     }
-
-}

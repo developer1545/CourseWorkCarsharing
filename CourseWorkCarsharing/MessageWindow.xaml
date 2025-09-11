@@ -27,9 +27,30 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="1" Text="Окно подтверждения" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Trebuchet MS" ></TextBlock>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <TextBlock Text="Вы выбрали:"></TextBlock>
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="10" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="166*"/>
+                                <ColumnDefinition Width="385*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Vertical" Background="#FFD1D1D1" Grid.Column="0" >
+
+                                <TextBlock Text="Вы выбрали" Grid.Column="0" FontSize="18" Margin="5" ></TextBlock>
+                                <TextBlock Text="Тариф:"  Grid.Column="1" FontSize="18" Margin="5" />
+
+                                <TextBlock Text="Автомобиль:"  Grid.Column="3" FontSize="18" Margin="5" />
+
+                                <TextBlock Text="Парковка:"  Grid.Column="5" FontSize="18" Margin="5" />
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Vertical" Background="#FFD1D1D1" >
+                                <TextBlock  Text="" FontSize="18" Margin="5" ></TextBlock>
+                                <TextBlock x:Name="OrderText" Text=""  FontSize="18" Margin="5" ></TextBlock>
+                                <TextBlock x:Name="AutoText" Text=""   FontSize="18" Margin="5" />
+                                <TextBlock x:Name="ParkAutoText" Text=""  FontSize="18" Margin="5" TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
                         </Grid>
+
                         <Grid Grid.Column="1" Grid.Row="2" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -39,6 +60,7 @@
                             <TextBlock Margin="5" Grid.Column="0" x:Name="WindowText" Text="Это проверка шрифта его размера." FontSize="24" Grid.ColumnSpan="2" TextWrapping="Wrap"></TextBlock>
                             <Button Margin="5" Grid.Column="1" x:Name="WindowButton" Content="Это кнопка" FontSize="20" MaxWidth="300" MaxHeight="30" ></Button>
                         </Grid>
+                        <Button Margin="5" Content="Заказать" Click="ButtonClickOrderM" Grid.Column="1" Grid.Row="3" Background="#FF30BCFF" Foreground="Black" BorderBrush="White" FontSize="22" ></Button>
 
 
                     </Grid>

@@ -14,9 +14,17 @@ namespace CourseWorkCarsharing
     
     public partial class Parking
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Parking()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int ID_Парковки { get; set; }
-        public string Тип_парковки { get; set; }
         public string Название { get; set; }
         public string Расположение { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

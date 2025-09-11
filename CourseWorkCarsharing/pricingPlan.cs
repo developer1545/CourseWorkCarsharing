@@ -14,10 +14,19 @@ namespace CourseWorkCarsharing
     
     public partial class pricingPlan
     {
-        public int Pricing_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public pricingPlan()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int ID { get; set; }
         public string Pricing_name { get; set; }
         public string Term { get; set; }
+        public int Cost { get; set; }
         public string Type { get; set; }
-        public decimal Cost { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

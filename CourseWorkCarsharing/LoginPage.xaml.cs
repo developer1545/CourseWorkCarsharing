@@ -20,54 +20,102 @@ namespace CourseWorkCarsharing
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage()
-        {
-            InitializeComponent();
-        }
+        private bool isLogin = false;
+        
+            private bool _isUpdatingPassword = false;
 
-      
-
-        private void MouseRegEnter(object sender, MouseEventArgs e)
-        {
-            TextRegPage.TextDecorations = TextDecorations.Underline;
-        }
-
-        private void MouseRegLeave(object sender, MouseEventArgs e)
-        {
-            TextRegPage.TextDecorations = null;
-        }
-
-        private void RegisterButtonClick(object sender, MouseButtonEventArgs e)
-        {
-            this.NavigationService.Navigate(new RegisterPage());
-        }
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (!showPasswordCheckBox.IsChecked.GetValueOrDefault())
+            public LoginPage()
             {
-                textBox.Visibility = Visibility.Collapsed;
+                InitializeComponent();
+            }
+        private void ButtonLoginClick(object sender, RoutedEventArgs e)
+        {
+            string login = LogTextBox.Text.Trim();
+            string password = showPasswordCheckBox.IsChecked == true ? textBox.Text : LogPasswordBox.Password;
+
+            var user = CarsharingBDEntities.GetContext().Users
+                .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+            if (user != null)
+            {
+                MessageBox.Show($"Добро пожаловать, {user.Name}!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Application.Current.Properties["IsLoggedIn"] = true;
+                Application.Current.Properties["User Name"] = user.Name;
+                Application.Current.Properties["User Role"] = user.Role;
+
+                // Проверяем роль пользователя
+                if (user.Role.Trim() == "Admin")
+                {
+                    var adminWindow = new AdminWindow();
+                    adminWindow.Show();
+                    //Application.Current.MainWindow.Close();
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new MainPage());
+                }
             }
             else
             {
-                textBox.Text = LogPasswordBox.Password;
+                MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+       
 
-        private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            textBox.Visibility = Visibility.Visible;
-            textBox.Text = LogPasswordBox.Password;
-            LogPasswordBox.Visibility = Visibility.Collapsed;
-            showPasswordCheckBox.Content = "Скрыть пароль 🔓";
-        }
-        private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LogPasswordBox.Visibility = Visibility.Visible;
-            LogPasswordBox.Password = textBox.Text;
-            textBox.Visibility = Visibility.Collapsed;
-            showPasswordCheckBox.Content = "Показать пароль 🔒";
-        }
+            private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+            {
+                if (_isUpdatingPassword) return;
 
+                _isUpdatingPassword = true;
+                if (showPasswordCheckBox.IsChecked == true)
+                {
+                    textBox.Text = LogPasswordBox.Password;
+                }
+                _isUpdatingPassword = false;
+            }
+
+            private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                if (_isUpdatingPassword) return;
+
+                _isUpdatingPassword = true;
+                if (showPasswordCheckBox.IsChecked == true)
+                {
+                    LogPasswordBox.Password = textBox.Text;
+                }
+                _isUpdatingPassword = false;
+            }
+
+            private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
+            {
+                textBox.Visibility = Visibility.Visible;
+                textBox.Text = LogPasswordBox.Password;
+                LogPasswordBox.Visibility = Visibility.Collapsed;
+                showPasswordCheckBox.Content = "Скрыть пароль 🔓";
+            }
+
+            private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
+            {
+                LogPasswordBox.Visibility = Visibility.Visible;
+                LogPasswordBox.Password = textBox.Text;
+                textBox.Visibility = Visibility.Collapsed;
+                showPasswordCheckBox.Content = "Показать пароль 🔒";
+            }
+
+            private void MouseRegEnter(object sender, MouseEventArgs e)
+            {
+                TextRegPage.TextDecorations = TextDecorations.Underline;
+            }
+
+            private void MouseRegLeave(object sender, MouseEventArgs e)
+            {
+                TextRegPage.TextDecorations = null;
+            }
+
+            private void RegisterButtonClick(object sender, MouseButtonEventArgs e)
+            {
+                this.NavigationService.Navigate(new RegisterPage());
+            }
         }
     }
-

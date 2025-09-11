@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32fa48654c8f4b61a5585649e851e624" Name="Diagram1">
+        <EntityTypeShape EntityType="CarsharingBDModel.Auto" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.Order" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.Parking" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.pricingPlan" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.UserData" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingBDModel.User" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="CarsharingBDModel.FK__Orders__AutoID__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingBDModel.FK__Orders__ParkingI__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingBDModel.FK__Orders__PricingP__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingBDModel.FK__Orders__UserID__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingBDModel.FK__UserDatas__UserI__1920BF5C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
